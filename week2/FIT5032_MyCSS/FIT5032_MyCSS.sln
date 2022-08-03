@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FIT5032_MyCSS", "FIT5032_MyCSS\FIT5032_MyCSS.csproj", "{FDE27697-7D7E-4B8B-AEEE-9A20AFD2BD6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FIT5032_MyCSS.Tests", "FIT5032_MyCSS.Tests\FIT5032_MyCSS.Tests.csproj", "{7B63E65A-B61C-4DF6-A835-D32752133DF7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FDE27697-7D7E-4B8B-AEEE-9A20AFD2BD6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDE27697-7D7E-4B8B-AEEE-9A20AFD2BD6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDE27697-7D7E-4B8B-AEEE-9A20AFD2BD6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDE27697-7D7E-4B8B-AEEE-9A20AFD2BD6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B63E65A-B61C-4DF6-A835-D32752133DF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B63E65A-B61C-4DF6-A835-D32752133DF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B63E65A-B61C-4DF6-A835-D32752133DF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B63E65A-B61C-4DF6-A835-D32752133DF7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7BC702D4-290D-4B56-9CF5-C01CCB19C57C}
+	EndGlobalSection
+EndGlobal
