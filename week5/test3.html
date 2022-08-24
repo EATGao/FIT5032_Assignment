@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Test3</title>
+	</head>
+	<body>
+		<form>
+			Choose which browser you prefer:
+			<select id="browsers" onchange="preferedBrowser()">
+				<option value="Chrome">Chrome</option>
+				<option value="Internet Explorer">Internet Explorer</option>
+				<option value="Firefox">Firefox</option>
+			</select>
+		</form>
+		<p id="timerCountDown" class="lead">
+            Start
+        </p>
+	</body>
+	<script>
+		function preferedBrowser() {
+			prefer = document.forms[0].browsers.value;
+			alert("You prefer browsing internet with " + prefer);
+		}
+		const timerElement = document.getElementById('timerCountDown');
+        let timer;
+
+        function startTimeCountDown() {
+            timer = 10;
+            const timeCountdown = setInterval(countdown, 1000);
+        }
+
+
+        function countdown() {
+            if (timer == 0) {
+                timerElement.innerHTML = 'Start'
+				alert("Congrats!")
+
+            } else {
+                timerElement.innerHTML = timer + ' secs';
+                timer--;
+            }
+        }
+
+        timerElement.addEventListener('click', ev => {
+            startTimeCountDown();
+        });
+	</script>
+</html>

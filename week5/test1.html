@@ -1,0 +1,14 @@
+<html>
+ <head>
+ </head>
+ <body>
+ <div id="test1">This is a simple message</div>
+ </body>
+ <script>
+	//The line below means it will execute the code inside the function() when the page is fully loaded
+	document.addEventListener("DOMContentLoaded", function () {
+	document.getElementById("test1").innerHTML = "This is a replaced message";
+	//This line of code firstly find the element (In this case it is a div element) through the id called “test1”, and then replace the content to “This is a replaced message”.
+	});
+ </script>
+</html>
