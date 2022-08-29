@@ -24,9 +24,15 @@ namespace HealingTalkNearestYou.Models
         public string Gender { get; set; }
 
         [Required]
-        public DateTime Birthday { get; set; }
+        public string SelfDescription { get; set; }
 
         [Required]
-        public string SelfDescription { get; set; }
+        public DateTime DateOfBirthday { get; set; }
+
+        [Required]
+        public string Password { get; set; }
+
+        [Required]
+        public string RoleName { get; set; }
     }
 }

@@ -54,6 +54,7 @@ namespace HealingTalkNearestYou.Controllers
 
         //
         // GET: /Account/Login
+        //return the view
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {

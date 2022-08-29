@@ -65,6 +65,14 @@ namespace HealingTalkNearestYou.Models
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "Firstname")]
+        public string Firstname { get; set; }
+
+        [Required]
+        [Display(Name = "Lastname")]
+        public string Lastname { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -79,6 +87,10 @@ namespace HealingTalkNearestYou.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Select user type")]
+        public string UserType { get; set; }
     }
 
     public class ResetPasswordViewModel
