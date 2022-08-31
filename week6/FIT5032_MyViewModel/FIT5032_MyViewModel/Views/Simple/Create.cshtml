@@ -21,7 +21,7 @@
             @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" }) <!--2. also can add in the middle ""-->
             </div>
         </div>
 

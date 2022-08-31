@@ -12,7 +12,7 @@ namespace FIT5032_MyViewModel.Models
 
     public class FormOneViewModel
     {
-        [Required]
+        [Required] // 1. add error message here
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
         public string LastName { get; set; }
