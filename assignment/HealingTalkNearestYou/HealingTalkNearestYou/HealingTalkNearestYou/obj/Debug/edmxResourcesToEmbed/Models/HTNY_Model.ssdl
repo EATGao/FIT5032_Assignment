@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HTNY_Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="HTNY_ModelStoreContainer">
+    <EntitySet Name="CounsellingSet" EntityType="HTNY_Model.Store.CounsellingSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserSet" EntityType="HTNY_Model.Store.UserSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserSet_Patient" EntityType="HTNY_Model.Store.UserSet_Patient" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserSet_Pyschologist" EntityType="HTNY_Model.Store.UserSet_Pyschologist" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserSet_Admin" EntityType="HTNY_Model.Store.UserSet_Admin" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="PatientCounselling" Association="HTNY_Model.Store.PatientCounselling">
+      <End Role="Patient" EntitySet="UserSet_Patient" />
+      <End Role="Counselling" EntitySet="CounsellingSet" />
+    </AssociationSet>
+    <AssociationSet Name="PyschologistCounselling" Association="HTNY_Model.Store.PyschologistCounselling">
+      <End Role="Pyschologist" EntitySet="UserSet_Pyschologist" />
+      <End Role="Counselling" EntitySet="CounsellingSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Patient_inherits_User" Association="HTNY_Model.Store.FK_Patient_inherits_User">
+      <End Role="User" EntitySet="UserSet" />
+      <End Role="Patient" EntitySet="UserSet_Patient" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pyschologist_inherits_User" Association="HTNY_Model.Store.FK_Pyschologist_inherits_User">
+      <End Role="User" EntitySet="UserSet" />
+      <End Role="Pyschologist" EntitySet="UserSet_Pyschologist" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Admin_inherits_User" Association="HTNY_Model.Store.FK_Admin_inherits_User">
+      <End Role="User" EntitySet="UserSet" />
+      <End Role="Admin" EntitySet="UserSet_Admin" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="CounsellingSet">
+    <Key>
+      <PropertyRef Name="CounsellingId" />
+    </Key>
+    <Property Name="CounsellingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CounsellingDateTime" Type="datetime" Nullable="false" />
+    <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PatientUserId" Type="int" Nullable="true" />
+    <Property Name="PyschologistUserId" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="UserSet">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserSet_Patient">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Gender" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserSet_Pyschologist">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Gender" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
+    <Property Name="ProfileDescription" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserSet_Admin">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="PatientCounselling">
+    <End Role="Patient" Type="HTNY_Model.Store.UserSet_Patient" Multiplicity="0..1" />
+    <End Role="Counselling" Type="HTNY_Model.Store.CounsellingSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Counselling">
+        <PropertyRef Name="PatientUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PyschologistCounselling">
+    <End Role="Pyschologist" Type="HTNY_Model.Store.UserSet_Pyschologist" Multiplicity="0..1" />
+    <End Role="Counselling" Type="HTNY_Model.Store.CounsellingSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pyschologist">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Counselling">
+        <PropertyRef Name="PyschologistUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Patient_inherits_User">
+    <End Role="User" Type="HTNY_Model.Store.UserSet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Patient" Type="HTNY_Model.Store.UserSet_Patient" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pyschologist_inherits_User">
+    <End Role="User" Type="HTNY_Model.Store.UserSet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Pyschologist" Type="HTNY_Model.Store.UserSet_Pyschologist" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Pyschologist">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Admin_inherits_User">
+    <End Role="User" Type="HTNY_Model.Store.UserSet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Admin" Type="HTNY_Model.Store.UserSet_Admin" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Admin">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

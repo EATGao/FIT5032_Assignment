@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HTNY.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="HTNYStoreContainer">
+    <EntitySet Name="AdminSet" EntityType="HTNY.Store.AdminSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PsychologistSet" EntityType="HTNY.Store.PsychologistSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CounsellingSet" EntityType="HTNY.Store.CounsellingSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientSet" EntityType="HTNY.Store.PatientSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="PsychologistCounselling" Association="HTNY.Store.PsychologistCounselling">
+      <End Role="Psychologist" EntitySet="PsychologistSet" />
+      <End Role="Counselling" EntitySet="CounsellingSet" />
+    </AssociationSet>
+    <AssociationSet Name="PatientCounselling" Association="HTNY.Store.PatientCounselling">
+      <End Role="Patient" EntitySet="PatientSet" />
+      <End Role="Counselling" EntitySet="CounsellingSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AdminSet">
+    <Key>
+      <PropertyRef Name="AdminId" />
+    </Key>
+    <Property Name="AdminId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AdminEmail" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AdminPassword" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PsychologistSet">
+    <Key>
+      <PropertyRef Name="PsyId" />
+    </Key>
+    <Property Name="PsyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PsyEmail" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PsyPassword" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PsyFirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PsyLastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PsyGender" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PsyDOB" Type="datetime" Nullable="false" />
+    <Property Name="PsyDescription" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="CounsellingSet">
+    <Key>
+      <PropertyRef Name="CId" />
+    </Key>
+    <Property Name="CId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CDateTime" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CRate" Type="int" Nullable="true" />
+    <Property Name="CStatus" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PsychologistPsyId" Type="int" Nullable="false" />
+    <Property Name="PatientPatientId" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="PatientSet">
+    <Key>
+      <PropertyRef Name="PatientId" />
+    </Key>
+    <Property Name="PatientId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PatientEmail" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PatientPassword" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PatientFirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PatientLastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PatientGender" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PatientDOB" Type="datetime" Nullable="true" />
+  </EntityType>
+  <Association Name="PsychologistCounselling">
+    <End Role="Psychologist" Type="HTNY.Store.PsychologistSet" Multiplicity="1" />
+    <End Role="Counselling" Type="HTNY.Store.CounsellingSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Psychologist">
+        <PropertyRef Name="PsyId" />
+      </Principal>
+      <Dependent Role="Counselling">
+        <PropertyRef Name="PsychologistPsyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PatientCounselling">
+    <End Role="Patient" Type="HTNY.Store.PatientSet" Multiplicity="0..1" />
+    <End Role="Counselling" Type="HTNY.Store.CounsellingSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="PatientId" />
+      </Principal>
+      <Dependent Role="Counselling">
+        <PropertyRef Name="PatientPatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="HTNY" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="HTNYContainer1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AdminSet" EntityType="HTNY.Admin" />
+          <EntitySet Name="PsychologistSet" EntityType="HTNY.Psychologist" />
+          <EntitySet Name="CounsellingSet" EntityType="HTNY.Counselling" />
+          <EntitySet Name="PatientSet" EntityType="HTNY.Patient" />
+          <AssociationSet Name="PsychologistCounselling" Association="HTNY.PsychologistCounselling">
+            <End Role="Psychologist" EntitySet="PsychologistSet" />
+            <End Role="Counselling" EntitySet="CounsellingSet" />
+          </AssociationSet>
+          <AssociationSet Name="PatientCounselling" Association="HTNY.PatientCounselling">
+            <End Role="Patient" EntitySet="PatientSet" />
+            <End Role="Counselling" EntitySet="CounsellingSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="AdminId" />
+          </Key>
+          <Property Name="AdminId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdminEmail" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="AdminPassword" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Psychologist">
+          <Key>
+            <PropertyRef Name="PsyId" />
+          </Key>
+          <Property Name="PsyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PsyEmail" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="PsyPassword" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="PsyFirstName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="PsyLastName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="PsyGender" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="PsyDOB" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PsyDescription" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Counselling" Relationship="HTNY.PsychologistCounselling" FromRole="Psychologist" ToRole="Counselling" />
+        </EntityType>
+        <EntityType Name="Counselling">
+          <Key>
+            <PropertyRef Name="CId" />
+          </Key>
+          <Property Name="CId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CDateTime" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="CRate" Type="Int32" Nullable="true" />
+          <Property Name="CStatus" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Psychologist" Relationship="HTNY.PsychologistCounselling" FromRole="Counselling" ToRole="Psychologist" />
+          <Property Name="PsychologistPsyId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Patient" Relationship="HTNY.PatientCounselling" FromRole="Counselling" ToRole="Patient" />
+          <Property Name="PatientPatientId" Type="Int32" Nullable="true" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="PatientId" />
+          </Key>
+          <Property Name="PatientId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientEmail" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="PatientPassword" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="PatientFirstName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="PatientLastName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="PatientGender" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="PatientDOB" Type="DateTime" />
+          <NavigationProperty Name="Counselling" Relationship="HTNY.PatientCounselling" FromRole="Patient" ToRole="Counselling" />
+        </EntityType>
+        <Association Name="PsychologistCounselling">
+          <End Type="HTNY.Psychologist" Role="Psychologist" Multiplicity="1" />
+          <End Type="HTNY.Counselling" Role="Counselling" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Psychologist">
+              <PropertyRef Name="PsyId" />
+            </Principal>
+            <Dependent Role="Counselling">
+              <PropertyRef Name="PsychologistPsyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PatientCounselling">
+          <End Type="HTNY.Patient" Role="Patient" Multiplicity="0..1" />
+          <End Type="HTNY.Counselling" Role="Counselling" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="PatientId" />
+            </Principal>
+            <Dependent Role="Counselling">
+              <PropertyRef Name="PatientPatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HTNYStoreContainer" CdmEntityContainer="HTNYContainer1">
+    <EntitySetMapping Name="AdminSet">
+      <EntityTypeMapping TypeName="IsTypeOf(HTNY.Admin)">
+        <MappingFragment StoreEntitySet="AdminSet">
+          <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+          <ScalarProperty Name="AdminEmail" ColumnName="AdminEmail" />
+          <ScalarProperty Name="AdminPassword" ColumnName="AdminPassword" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PsychologistSet">
+      <EntityTypeMapping TypeName="IsTypeOf(HTNY.Psychologist)">
+        <MappingFragment StoreEntitySet="PsychologistSet">
+          <ScalarProperty Name="PsyId" ColumnName="PsyId" />
+          <ScalarProperty Name="PsyEmail" ColumnName="PsyEmail" />
+          <ScalarProperty Name="PsyPassword" ColumnName="PsyPassword" />
+          <ScalarProperty Name="PsyFirstName" ColumnName="PsyFirstName" />
+          <ScalarProperty Name="PsyLastName" ColumnName="PsyLastName" />
+          <ScalarProperty Name="PsyGender" ColumnName="PsyGender" />
+          <ScalarProperty Name="PsyDOB" ColumnName="PsyDOB" />
+          <ScalarProperty Name="PsyDescription" ColumnName="PsyDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CounsellingSet">
+      <EntityTypeMapping TypeName="IsTypeOf(HTNY.Counselling)">
+        <MappingFragment StoreEntitySet="CounsellingSet">
+          <ScalarProperty Name="CId" ColumnName="CId" />
+          <ScalarProperty Name="CDateTime" ColumnName="CDateTime" />
+          <ScalarProperty Name="CRate" ColumnName="CRate" />
+          <ScalarProperty Name="CStatus" ColumnName="CStatus" />
+          <ScalarProperty Name="PsychologistPsyId" ColumnName="PsychologistPsyId" />
+          <ScalarProperty Name="PatientPatientId" ColumnName="PatientPatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientSet">
+      <EntityTypeMapping TypeName="IsTypeOf(HTNY.Patient)">
+        <MappingFragment StoreEntitySet="PatientSet">
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+          <ScalarProperty Name="PatientEmail" ColumnName="PatientEmail" />
+          <ScalarProperty Name="PatientPassword" ColumnName="PatientPassword" />
+          <ScalarProperty Name="PatientFirstName" ColumnName="PatientFirstName" />
+          <ScalarProperty Name="PatientLastName" ColumnName="PatientLastName" />
+          <ScalarProperty Name="PatientGender" ColumnName="PatientGender" />
+          <ScalarProperty Name="PatientDOB" ColumnName="PatientDOB" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
