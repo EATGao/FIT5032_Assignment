@@ -248,9 +248,11 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Patient\BookCounselling.cshtml" />
     <Content Include="Views\Account\RegisterNormal.cshtml" />
-    <Content Include="Views\Amin\ManagePatient.cshtml" />
-    <Content Include="Views\Amin\ManangePsychologist.cshtml" />
     <Content Include="Views\Psychologist\ManageCounselling.cshtml" />
+    <Content Include="Views\Admin\ManagePatient.cshtml" />
+    <Content Include="Views\Admin\ManagePsychologist.cshtml" />
+    <Content Include="Views\Admin\EditPsy.cshtml" />
+    <Content Include="Views\Admin\DeletePsy.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

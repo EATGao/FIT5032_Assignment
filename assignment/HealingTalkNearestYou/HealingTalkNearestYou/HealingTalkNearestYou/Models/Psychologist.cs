@@ -26,7 +26,7 @@ namespace HealingTalkNearestYou.Models
         public string PsyFirstName { get; set; }
         public string PsyLastName { get; set; }
         public string PsyGender { get; set; }
-        public System.DateTime PsyDOB { get; set; }
+        public Nullable<System.DateTime> PsyDOB { get; set; }
         public string PsyDescription { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -87,7 +87,7 @@ namespace HealingTalkNearestYou.DAL
             patient.PatientEmail = model.Email;
             patient.PatientGender = model.Gender;
             patient.PatientPassword = model.Password;
-            patient.PatientDOB = model.DOB;
+            patient.PatientDOB = null;
             patient.PatientFirstName = model.FirstName;
             patient.PatientLastName = model.LasttName;
 
@@ -101,7 +101,8 @@ namespace HealingTalkNearestYou.DAL
             psychologist.PsyEmail = model.Email;
             psychologist.PsyGender = model.Gender;
             psychologist.PsyPassword = model.Password;
-            psychologist.PsyDOB = model.DOB;
+            psychologist.PsyDOB = null;
+            psychologist.PsyDescription = null;
             psychologist.PsyFirstName = model.FirstName;
             psychologist.PsyLastName = model.LasttName;
 

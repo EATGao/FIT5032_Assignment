@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 09/16/2022 13:36:42
+-- Date Created: 09/16/2022 17:45:18
 -- Generated from EDMX file: D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\Models\HTNY.edmx
 -- --------------------------------------------------
 
@@ -17,17 +17,11 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_AdminPatient]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PatientSet] DROP CONSTRAINT [FK_AdminPatient];
-GO
-IF OBJECT_ID(N'[dbo].[FK_AdminPsychologist]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PsychologistSet] DROP CONSTRAINT [FK_AdminPsychologist];
+IF OBJECT_ID(N'[dbo].[FK_PsychologistCounselling]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CounsellingSet] DROP CONSTRAINT [FK_PsychologistCounselling];
 GO
 IF OBJECT_ID(N'[dbo].[FK_PatientCounselling]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[CounsellingSet] DROP CONSTRAINT [FK_PatientCounselling];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PsychologistCounselling]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CounsellingSet] DROP CONSTRAINT [FK_PsychologistCounselling];
 GO
 
 -- --------------------------------------------------
@@ -37,14 +31,14 @@ GO
 IF OBJECT_ID(N'[dbo].[AdminSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[AdminSet];
 GO
+IF OBJECT_ID(N'[dbo].[PsychologistSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PsychologistSet];
+GO
 IF OBJECT_ID(N'[dbo].[CounsellingSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CounsellingSet];
 GO
 IF OBJECT_ID(N'[dbo].[PatientSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PatientSet];
-GO
-IF OBJECT_ID(N'[dbo].[PsychologistSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PsychologistSet];
 GO
 
 -- --------------------------------------------------
@@ -67,7 +61,7 @@ CREATE TABLE [dbo].[PsychologistSet] (
     [PsyFirstName] nvarchar(max)  NOT NULL,
     [PsyLastName] nvarchar(max)  NOT NULL,
     [PsyGender] nvarchar(max)  NOT NULL,
-    [PsyDOB] datetime  NOT NULL,
+    [PsyDOB] datetime  NULL,
     [PsyDescription] nvarchar(max)  NULL
 );
 GO

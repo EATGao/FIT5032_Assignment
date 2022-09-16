@@ -1,0 +1,56 @@
+﻿@model IEnumerable<HealingTalkNearestYou.Models.Patient>
+
+@{
+    ViewBag.Title = "ManagePatient";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ManagePatient</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PatientEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PatientFirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PatientLastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PatientGender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PatientDOB)
+        </th>
+        <th>
+            Operation
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PatientEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PatientFirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PatientLastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PatientGender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PatientDOB)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PatientId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PatientId })
+        </td>
+    </tr>
+}
+
+</table>

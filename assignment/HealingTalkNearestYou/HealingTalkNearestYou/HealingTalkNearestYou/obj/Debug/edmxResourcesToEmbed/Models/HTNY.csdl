@@ -32,7 +32,7 @@
     <Property Name="PsyFirstName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <Property Name="PsyLastName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <Property Name="PsyGender" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-    <Property Name="PsyDOB" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PsyDOB" Type="DateTime" Nullable="true" Precision="3" />
     <Property Name="PsyDescription" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="Counselling" Relationship="HTNY.PsychologistCounselling" FromRole="Psychologist" ToRole="Counselling" />
   </EntityType>

@@ -1,0 +1,69 @@
+﻿@model IEnumerable<HealingTalkNearestYou.Models.Psychologist>
+
+@{
+    ViewBag.Title = "ManagePsychologist";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ManagePsychologist</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PsyId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PsyEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PsyFirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PsyLastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PsyGender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PsyDOB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PsyDescription)
+        </th>
+        <th>
+            Operation
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PsyId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PsyEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PsyFirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PsyLastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PsyGender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PsyDOB)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PsyDescription)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PsyId }) |
+
+            @Html.ActionLink("Delete", "Delete", new { id=item.PsyId })
+        </td>
+    </tr>
+}
+
+</table>
