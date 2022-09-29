@@ -15,9 +15,9 @@ namespace HealingTalkNearestYou.Controllers
         public ActionResult Login()
         {
             var selectUserTypeList = new List<SelectListItem>() {
-                new SelectListItem() { Value = "1", Text = "Admin" },
-                new SelectListItem() { Value = "2", Text = "Patient" },
-                new SelectListItem() { Value = "3", Text = "Pychologist" }
+                new SelectListItem() { Value = "Admin", Text = "Admin" },
+                new SelectListItem() { Value = "Patient", Text = "Patient" },
+                new SelectListItem() { Value = "Pychologist", Text = "Pychologist" }
             };
 
             ViewBag.UserTypeOptions = selectUserTypeList;
@@ -67,7 +67,7 @@ namespace HealingTalkNearestYou.Controllers
                         return RedirectToAction("Index", "Home");
                     }
                 }
-                else if (model.UserType == "Psychologits")
+                else if (model.UserType == "Psychologist")
                 {
                     PsychologistViewModel psychologistViewModel = userRepository.PsychologistValidate(model);
                     if (psychologistViewModel == null)
@@ -121,14 +121,14 @@ namespace HealingTalkNearestYou.Controllers
 
             if (ModelState.IsValid)
             {
-                if (model.UserType == "Patient")
+                if (model.UserType.Equals("1"))
                 {
                     Patient newPatient = userRepository.PatientRegister(model);
                     htny_DB.PatientSet.Add(newPatient);
                     htny_DB.SaveChangesAsync();
 
                 }
-                else 
+                else if (model.UserType.Equals("2"))
                 {
                     Psychologist newPsychologist = userRepository.PsychologistRegister(model);
                     htny_DB.PsychologistSet.Add(newPsychologist);

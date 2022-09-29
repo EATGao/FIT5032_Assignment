@@ -51,6 +51,8 @@ D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNeares
 D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\roslyn\VBCSCompiler.exe
 D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\roslyn\VBCSCompiler.exe.config
 D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\Antlr3.Runtime.dll
+D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\EntityFramework.dll
+D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\EntityFramework.SqlServer.dll
 D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\Microsoft.Web.Infrastructure.dll
 D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\Newtonsoft.Json.dll
@@ -65,6 +67,8 @@ D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNeares
 D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\System.Web.WebPages.dll
 D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\System.Web.WebPages.Razor.dll
 D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\WebGrease.dll
+D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\EntityFramework.xml
+D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\EntityFramework.SqlServer.xml
 D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\System.Web.Helpers.xml
 D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\System.Web.Mvc.xml
 D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\System.Web.Optimization.xml
@@ -83,7 +87,3 @@ D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNeares
 D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\obj\Debug\HealingTalkNearestYou.csproj.CopyComplete
 D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\obj\Debug\HealingTalkNearestYou.dll
 D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\obj\Debug\HealingTalkNearestYou.pdb
-D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\EntityFramework.dll
-D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\EntityFramework.SqlServer.dll
-D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\EntityFramework.xml
-D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\EntityFramework.SqlServer.xml

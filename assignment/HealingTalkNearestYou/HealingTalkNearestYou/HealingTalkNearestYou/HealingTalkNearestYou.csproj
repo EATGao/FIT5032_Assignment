@@ -144,6 +144,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
     <Compile Include="Controllers\PsychologistController.cs" />
@@ -256,6 +257,7 @@
     <Content Include="Views\Admin\EditPsy.cshtml" />
     <Content Include="Views\Admin\DeletePsy.cshtml" />
     <Content Include="Views\Admin\DetailPsy.cshtml" />
+    <Content Include="Views\Booking\BookCounselling.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
