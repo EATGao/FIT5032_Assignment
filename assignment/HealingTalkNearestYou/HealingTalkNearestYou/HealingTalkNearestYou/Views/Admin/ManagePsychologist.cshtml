@@ -5,30 +5,21 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ManagePsychologist</h2>
+<h2>Manage Psychologists</h2>
 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.PsyId)
+            ID
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PsyEmail)
+            Email
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PsyFirstName)
+            First Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PsyLastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PsyGender)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PsyDOB)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PsyDescription)
+            Last Name
         </th>
         <th>
             Operation
@@ -50,18 +41,11 @@
             @Html.DisplayFor(modelItem => item.PsyLastName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.PsyGender)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PsyDOB)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PsyDescription)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PsyId }) |
+            @Html.ActionLink("Edit", "EditPsy", new { id = item.PsyId }) |
 
-            @Html.ActionLink("Delete", "Delete", new { id=item.PsyId })
+            @Html.ActionLink("Delete", "DeletePsy", new { id = item.PsyId })
+
+            @Html.ActionLink("Detail", "DetailPsy", new { id = item.PsyId })
         </td>
     </tr>
 }

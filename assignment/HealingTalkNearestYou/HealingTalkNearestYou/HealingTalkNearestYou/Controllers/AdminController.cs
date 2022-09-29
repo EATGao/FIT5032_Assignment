@@ -76,6 +76,12 @@ namespace HealingTalkNearestYou.Controllers
             return RedirectToAction("ManagePsychologist");
         }
 
+        public ActionResult DetailPsy(int id)
+        {
+            Psychologist psy = htny_DB.PsychologistSet.Find(id);
+            return View(psy);
+        }
+
         public ActionResult DeletePsy(int id)
         {
             Psychologist psy = htny_DB.PsychologistSet.Find(id);

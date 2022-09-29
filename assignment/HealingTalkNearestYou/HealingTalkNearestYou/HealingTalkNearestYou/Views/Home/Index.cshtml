@@ -3,7 +3,11 @@
 }
 
 <link href="~/Content/indexStyle.css" rel="stylesheet" />
-<img src="~/images/homepage.jpg" alt="img" />
+<img srcset="~/images/homepage-lower.jpg 480w, ~/images/homepage.jpg 800w"
+     sizes="(max-width: 600px) 480px,
+         800px"
+     src="~/images/homepage.jpg"
+     alt="homepage picture" />
 <div>
     <h1>HealingTalk<br>NearestYou</h1><br />
     <p>Feel anxious, depression or... Talk to us.<br>Help you to release your pressure as much as we can.</p>

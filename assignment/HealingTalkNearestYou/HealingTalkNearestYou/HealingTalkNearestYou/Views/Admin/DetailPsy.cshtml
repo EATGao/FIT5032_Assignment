@@ -1,0 +1,67 @@
+﻿@model HealingTalkNearestYou.Models.Psychologist
+
+@{
+    ViewBag.Title = "DetailPsy";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>DetailPsy</h2>
+
+<div>
+    <h4>Psychologist</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PsyEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PsyEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PsyFirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PsyFirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PsyLastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PsyLastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PsyGender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PsyGender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PsyDOB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PsyDOB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PsyDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PsyDescription)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PsyId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

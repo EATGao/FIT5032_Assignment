@@ -5,24 +5,27 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ManagePatient</h2>
+<h2>Manage Patients</h2>
 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.PatientEmail)
+            ID
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PatientFirstName)
+            Email
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PatientLastName)
+            First Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PatientGender)
+            Last Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PatientDOB)
+            Gender
+        </th>
+        <th>
+            Date of Birth
         </th>
         <th>
             Operation
@@ -31,6 +34,9 @@
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PatientId)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.PatientEmail)
         </td>
@@ -47,8 +53,8 @@
             @Html.DisplayFor(modelItem => item.PatientDOB)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PatientId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PatientId })
+            @Html.ActionLink("Edit", "EditPatient", new { id = item.PatientId }) |
+            @Html.ActionLink("Delete", "DeletePatient", new { id = item.PatientId })
         </td>
     </tr>
 }
