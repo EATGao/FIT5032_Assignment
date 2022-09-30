@@ -22,10 +22,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink("Time", "ManageCounselling", new {sort = ViewBag.SortByTime, search = Request.QueryString["search"] })
+            @Html.ActionLink("Time", "ManageCounselling", new { sort = ViewBag.SortByTime, search = Request.QueryString["search"] })
         </th>
         <th>
             @Html.ActionLink("Status", "ManageCounselling", new { sort = ViewBag.SortByStatus, search = Request.QueryString["search"] })
+        </th>
+        <th>
+            Patient Name
         </th>
         <th>
             Operations
@@ -47,6 +50,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.CStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Patient.PatientName)
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.CId }) |

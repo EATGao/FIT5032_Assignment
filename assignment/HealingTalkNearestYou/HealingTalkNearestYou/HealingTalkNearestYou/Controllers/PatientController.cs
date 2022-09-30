@@ -5,9 +5,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
+using HealingTalkNearestYou.CustomSecurity;
 
 namespace HealingTalkNearestYou.Controllers
 {
+    [CustomAuthentication]
+    [CustomAuthorization(UserType = "Patient")]
     public class PatientController : Controller
     {
         HTNYContainer1 htny_DB = new HTNYContainer1();

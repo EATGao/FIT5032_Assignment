@@ -30,7 +30,6 @@ namespace HealingTalkNearestYou.Controllers
                 case "ascending time":
                     counsellings = counsellings.OrderBy(c => c.CDateTime);
                     break;
-
                 case "descending status":
                     counsellings = counsellings.OrderByDescending(c => c.CStatus);
                     break;
@@ -95,7 +94,7 @@ namespace HealingTalkNearestYou.Controllers
             return RedirectToAction("ManagePatient");
         }
 
-        public ActionResult DeletePatient(int id)
+        public ActionResult Delete(int id)
         {
             Counselling counselling = htny_DB.CounsellingSet.Find(id);
             if (counselling == null)
