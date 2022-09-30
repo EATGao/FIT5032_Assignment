@@ -23,8 +23,7 @@ namespace HealingTalkNearestYou.Models
         public int PsyId { get; set; }
         public string PsyEmail { get; set; }
         public string PsyPassword { get; set; }
-        public string PsyFirstName { get; set; }
-        public string PsyLastName { get; set; }
+        public string PsyName { get; set; }
         public string PsyGender { get; set; }
         public Nullable<System.DateTime> PsyDOB { get; set; }
         public string PsyDescription { get; set; }

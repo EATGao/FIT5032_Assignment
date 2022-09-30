@@ -23,8 +23,7 @@ namespace HealingTalkNearestYou.Models
         public int PatientId { get; set; }
         public string PatientEmail { get; set; }
         public string PatientPassword { get; set; }
-        public string PatientFirstName { get; set; }
-        public string PatientLastName { get; set; }
+        public string PatientName { get; set; }
         public string PatientGender { get; set; }
         public Nullable<System.DateTime> PatientDOB { get; set; }
     

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 09/29/2022 23:05:07
+-- Date Created: 09/30/2022 13:24:29
 -- Generated from EDMX file: D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\Models\HTNY.edmx
 -- --------------------------------------------------
 
@@ -58,8 +58,7 @@ CREATE TABLE [dbo].[PsychologistSet] (
     [PsyId] int IDENTITY(1,1) NOT NULL,
     [PsyEmail] nvarchar(max)  NOT NULL,
     [PsyPassword] nvarchar(max)  NOT NULL,
-    [PsyFirstName] nvarchar(max)  NOT NULL,
-    [PsyLastName] nvarchar(max)  NOT NULL,
+    [PsyName] nvarchar(max)  NOT NULL,
     [PsyGender] nvarchar(max)  NOT NULL,
     [PsyDOB] datetime  NULL,
     [PsyDescription] nvarchar(max)  NULL
@@ -82,8 +81,7 @@ CREATE TABLE [dbo].[PatientSet] (
     [PatientId] int IDENTITY(1,1) NOT NULL,
     [PatientEmail] nvarchar(max)  NOT NULL,
     [PatientPassword] nvarchar(max)  NOT NULL,
-    [PatientFirstName] nvarchar(max)  NOT NULL,
-    [PatientLastName] nvarchar(max)  NOT NULL,
+    [PatientName] nvarchar(max)  NOT NULL,
     [PatientGender] nvarchar(max)  NOT NULL,
     [PatientDOB] datetime  NULL
 );

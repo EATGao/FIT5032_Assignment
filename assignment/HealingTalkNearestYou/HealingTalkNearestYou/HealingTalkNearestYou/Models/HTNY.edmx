@@ -34,8 +34,7 @@
     <Property Name="PsyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="PsyEmail" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PsyPassword" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PsyFirstName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PsyLastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PsyName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PsyGender" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PsyDOB" Type="datetime" Nullable="true" />
     <Property Name="PsyDescription" Type="nvarchar(max)" Nullable="true" />
@@ -58,8 +57,7 @@
     <Property Name="PatientId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="PatientEmail" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PatientPassword" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PatientFirstName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PatientLastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PatientName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PatientGender" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PatientDOB" Type="datetime" Nullable="true" />
   </EntityType>
@@ -120,8 +118,7 @@
           <Property Name="PsyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PsyEmail" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="PsyPassword" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="PsyFirstName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="PsyLastName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="PsyName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="PsyGender" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="PsyDOB" Type="DateTime" Nullable="true" Precision="3" />
           <Property Name="PsyDescription" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
@@ -147,8 +144,7 @@
           <Property Name="PatientId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PatientEmail" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="PatientPassword" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="PatientFirstName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="PatientLastName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="PatientName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="PatientGender" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="PatientDOB" Type="DateTime" />
           <NavigationProperty Name="Counselling" Relationship="HTNY.PatientCounselling" FromRole="Patient" ToRole="Counselling" />
@@ -198,8 +194,7 @@
           <ScalarProperty Name="PsyId" ColumnName="PsyId" />
           <ScalarProperty Name="PsyEmail" ColumnName="PsyEmail" />
           <ScalarProperty Name="PsyPassword" ColumnName="PsyPassword" />
-          <ScalarProperty Name="PsyFirstName" ColumnName="PsyFirstName" />
-          <ScalarProperty Name="PsyLastName" ColumnName="PsyLastName" />
+          <ScalarProperty Name="PsyName" ColumnName="PsyName" />
           <ScalarProperty Name="PsyGender" ColumnName="PsyGender" />
           <ScalarProperty Name="PsyDOB" ColumnName="PsyDOB" />
           <ScalarProperty Name="PsyDescription" ColumnName="PsyDescription" />
@@ -224,8 +219,7 @@
           <ScalarProperty Name="PatientId" ColumnName="PatientId" />
           <ScalarProperty Name="PatientEmail" ColumnName="PatientEmail" />
           <ScalarProperty Name="PatientPassword" ColumnName="PatientPassword" />
-          <ScalarProperty Name="PatientFirstName" ColumnName="PatientFirstName" />
-          <ScalarProperty Name="PatientLastName" ColumnName="PatientLastName" />
+          <ScalarProperty Name="PatientName" ColumnName="PatientName" />
           <ScalarProperty Name="PatientGender" ColumnName="PatientGender" />
           <ScalarProperty Name="PatientDOB" ColumnName="PatientDOB" />
         </MappingFragment>
