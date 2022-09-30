@@ -23,22 +23,22 @@ namespace HealingTalkNearestYou.Controllers
             ViewBag.SortByStatus = sort == "Status" ? "descending status" : "ascending status";
 
             var counsellings = htny_DB.CounsellingSet.AsQueryable();
-            // add more search later
-            counsellings = counsellings.Where(x => x.Patient.PatientFirstName.StartsWith(search) || search == null);
+
+            counsellings = counsellings.Where(c => c.Patient.PatientName.StartsWith(search) || search == null);
             switch (sort)
             {
                 case "ascending time":
-                    counsellings = counsellings.OrderBy(x => x.CDateTime);
+                    counsellings = counsellings.OrderBy(c => c.CDateTime);
                     break;
 
                 case "descending status":
-                    counsellings = counsellings.OrderByDescending(x => x.CStatus);
+                    counsellings = counsellings.OrderByDescending(c => c.CStatus);
                     break;
                 case "ascending status":
-                    counsellings = counsellings.OrderBy(x => x.CStatus);
+                    counsellings = counsellings.OrderBy(c => c.CStatus);
                     break;
                 default:
-                    counsellings = counsellings.OrderByDescending(x => x.CDateTime);
+                    counsellings = counsellings.OrderByDescending(c => c.CDateTime);
                     break;
 
             }

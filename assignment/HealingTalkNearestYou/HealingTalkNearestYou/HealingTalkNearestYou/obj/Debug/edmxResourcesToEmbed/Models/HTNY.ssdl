@@ -29,8 +29,7 @@
     <Property Name="PsyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="PsyEmail" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PsyPassword" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PsyFirstName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PsyLastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PsyName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PsyGender" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PsyDOB" Type="datetime" Nullable="true" />
     <Property Name="PsyDescription" Type="nvarchar(max)" Nullable="true" />
@@ -53,8 +52,7 @@
     <Property Name="PatientId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="PatientEmail" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PatientPassword" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PatientFirstName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PatientLastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PatientName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PatientGender" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PatientDOB" Type="datetime" Nullable="true" />
   </EntityType>

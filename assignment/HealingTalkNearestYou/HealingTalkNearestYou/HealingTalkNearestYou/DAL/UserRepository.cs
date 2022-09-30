@@ -36,8 +36,7 @@ namespace HealingTalkNearestYou.DAL
             {
                 PatientViewModel patientViewModel = new PatientViewModel();
                 patientViewModel.PatientEmail = patient.PatientEmail;
-                patientViewModel.PatientFirstName = patient.PatientFirstName;
-                patientViewModel.PatientFirstName = patient.PatientLastName;
+                patientViewModel.PatientName = patient.PatientName;
                 patientViewModel.PatientGender = patient.PatientGender;
                 patientViewModel.PatientDOB = (DateTime)patient.PatientDOB;
                 return patientViewModel;
@@ -58,8 +57,7 @@ namespace HealingTalkNearestYou.DAL
             {
                 PsychologistViewModel psyViewModel = new PsychologistViewModel();
                 psyViewModel.PsyEmail = psychologist.PsyEmail;
-                psyViewModel.PsyFirstName = psychologist.PsyFirstName;
-                psyViewModel.PsyFirstName = psychologist.PsyLastName;
+                psyViewModel.PsyName = psychologist.PsyName;
                 psyViewModel.PsyGender = psychologist.PsyGender;
                 psyViewModel.PsyDOB = (DateTime)psychologist.PsyDOB;
                 return psyViewModel;
@@ -88,8 +86,7 @@ namespace HealingTalkNearestYou.DAL
             patient.PatientGender = model.Gender;
             patient.PatientPassword = model.Password;
             patient.PatientDOB = model.DOB;
-            patient.PatientFirstName = model.FirstName;
-            patient.PatientLastName = model.LasttName;
+            patient.PatientName = model.Name;
 
             return patient;
         }
@@ -103,8 +100,7 @@ namespace HealingTalkNearestYou.DAL
             psychologist.PsyPassword = model.Password;
             psychologist.PsyDOB = model.DOB;
             psychologist.PsyDescription = null;
-            psychologist.PsyFirstName = model.FirstName;
-            psychologist.PsyLastName = model.LasttName;
+            psychologist.PsyName = model.Name;
 
             return psychologist;
         }

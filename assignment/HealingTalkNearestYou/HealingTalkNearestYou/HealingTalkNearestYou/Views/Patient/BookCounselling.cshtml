@@ -1,4 +1,7 @@
-﻿@model IEnumerable<HealingTalkNearestYou.Models.Counselling>
+﻿@model IPagedList<HealingTalkNearestYou.Models.Counselling>
+@using PagedList;
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" />
 
 @{
     ViewBag.Title = "BookCounselling";
@@ -6,47 +9,62 @@
 }
 
 <h2>BookCounselling</h2>
-
+@using (Html.BeginForm("BookCounselling", "Patient", FormMethod.Get))
+{
+    @Html.TextBox("search")
+    <input type="submit" name="submit" value="Search" />
+}
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.CDateTime)
+            @Html.ActionLink("Time", "BookCounselling", new { sort = ViewBag.SortByTime, search = Request.QueryString["search"] })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CStatus)
+            @Html.ActionLink("Status", "BookCounselling", new { sort = ViewBag.SortByStatus, search = Request.QueryString["search"] })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Psychologist.PsyFirstName)
+            @Html.ActionLink("Name", "BookCounselling", new { sort = ViewBag.SortByPsyName, search = Request.QueryString["search"] })
         </th>
         <th>
             Operation
         </th>
     </tr>
-
-    @foreach (var item in Model)
+    @if (Model.Count() == 0)
     {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CDateTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CStatus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Psychologist.PsyFirstName)
-                @Html.DisplayFor(modelItem => item.Psychologist.PsyLastName)
-            </td>
-            <td>
-                @if (item.CStatus.Equals("Not Booked"))
-                {
-                    @Html.ActionLink("Book", "Book", new { id = item.CId })
-                }
-                else
-                {
-                    <p>Booked</p>
-                }
-            </td>
+            <td colspan="3">No counselling records</td>
         </tr>
-     }
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            if (!item.CStatus.Equals("Completed"))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CDateTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CStatus)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Psychologist.PsyName)
+                    </td>
+                    <td>
+                        @if (item.CStatus.Equals("Not Booked"))
+                        {
+                            @Html.ActionLink("Book", "Book", new { id = item.CId })
+                        }
+                        else
+                        {
+                            <text>Booked</text>
+                        }
+                    </td>
+                </tr>
+            }
+        }
+    }
 
 </table>
+@Html.PagedListPager(Model, pageNumber => Url.Action("BookCounselling", new { pageNumber, search = Request.QueryString["search"], sort = Request.QueryString["sort"] }))

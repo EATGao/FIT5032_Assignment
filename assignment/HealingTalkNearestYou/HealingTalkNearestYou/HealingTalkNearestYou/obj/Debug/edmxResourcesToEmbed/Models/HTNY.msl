@@ -16,8 +16,7 @@
           <ScalarProperty Name="PsyId" ColumnName="PsyId" />
           <ScalarProperty Name="PsyEmail" ColumnName="PsyEmail" />
           <ScalarProperty Name="PsyPassword" ColumnName="PsyPassword" />
-          <ScalarProperty Name="PsyFirstName" ColumnName="PsyFirstName" />
-          <ScalarProperty Name="PsyLastName" ColumnName="PsyLastName" />
+          <ScalarProperty Name="PsyName" ColumnName="PsyName" />
           <ScalarProperty Name="PsyGender" ColumnName="PsyGender" />
           <ScalarProperty Name="PsyDOB" ColumnName="PsyDOB" />
           <ScalarProperty Name="PsyDescription" ColumnName="PsyDescription" />
@@ -42,8 +41,7 @@
           <ScalarProperty Name="PatientId" ColumnName="PatientId" />
           <ScalarProperty Name="PatientEmail" ColumnName="PatientEmail" />
           <ScalarProperty Name="PatientPassword" ColumnName="PatientPassword" />
-          <ScalarProperty Name="PatientFirstName" ColumnName="PatientFirstName" />
-          <ScalarProperty Name="PatientLastName" ColumnName="PatientLastName" />
+          <ScalarProperty Name="PatientName" ColumnName="PatientName" />
           <ScalarProperty Name="PatientGender" ColumnName="PatientGender" />
           <ScalarProperty Name="PatientDOB" ColumnName="PatientDOB" />
         </MappingFragment>

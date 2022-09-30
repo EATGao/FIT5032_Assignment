@@ -16,10 +16,7 @@
             Email
         </th>
         <th>
-            First Name
-        </th>
-        <th>
-            Last Name
+            Name
         </th>
         <th>
             Operation
@@ -35,10 +32,7 @@
             @Html.DisplayFor(modelItem => item.PsyEmail)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.PsyFirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PsyLastName)
+            @Html.DisplayFor(modelItem => item.PsyName)
         </td>
         <td>
             @Html.ActionLink("Edit", "EditPsy", new { id = item.PsyId }) |

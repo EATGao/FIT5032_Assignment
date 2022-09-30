@@ -63,12 +63,9 @@ namespace HealingTalkNearestYou.Models
         public string ConfirmPassword { get; set; }
 
         [Required]
-        [Display(Name = "FirstName")]
-        public string FirstName { get; set; }
+        [Display(Name = "Name")]
+        public string Name { get; set; }
 
-        [Required]
-        [Display(Name = "LastName")]
-        public string LasttName { get; set; }
 
         [Required]
         [Display(Name = "Gender")]
@@ -92,8 +89,7 @@ namespace HealingTalkNearestYou.Models
     public class PatientViewModel
     {
         public string PatientEmail;
-        public string PatientFirstName;
-        public string PatientLastName;
+        public string PatientName;
         public string PatientGender;
         public DateTime PatientDOB;
     }
@@ -101,8 +97,7 @@ namespace HealingTalkNearestYou.Models
     public class PsychologistViewModel
     {
         public string PsyEmail;
-        public string PsyFirstName;
-        public string PsyLastName;
+        public string PsyName;
         public string PsyGender;
         public DateTime PsyDOB;
         public string PsyDescription;

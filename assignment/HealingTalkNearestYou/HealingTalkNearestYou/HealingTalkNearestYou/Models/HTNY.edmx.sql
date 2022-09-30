@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 09/30/2022 13:24:29
+-- Date Created: 09/30/2022 13:49:48
 -- Generated from EDMX file: D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\Models\HTNY.edmx
 -- --------------------------------------------------
 
