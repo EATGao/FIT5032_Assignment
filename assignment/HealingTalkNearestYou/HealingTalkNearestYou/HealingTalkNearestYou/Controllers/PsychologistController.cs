@@ -23,7 +23,7 @@ namespace HealingTalkNearestYou.Controllers
             ViewBag.SortByStatus = sort == "Status" ? "descending status" : "ascending status";
 
             var counsellings = htny_DB.CounsellingSet.AsQueryable();
-
+            counsellings = counsellings.Where(c => c.Psychologist.PsyEmail == User.Identity.Name);
             counsellings = counsellings.Where(c => c.Patient.PatientName.StartsWith(search) || search == null);
             switch (sort)
             {

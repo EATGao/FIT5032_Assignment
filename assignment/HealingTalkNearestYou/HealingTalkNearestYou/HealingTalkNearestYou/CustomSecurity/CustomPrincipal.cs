@@ -27,5 +27,6 @@ namespace HealingTalkNearestYou.CustomSecurity
         }
 
         public string UserType { get; set; }
+
     }
 }

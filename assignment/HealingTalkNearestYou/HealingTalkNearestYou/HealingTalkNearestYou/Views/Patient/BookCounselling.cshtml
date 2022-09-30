@@ -39,8 +39,6 @@
     {
         foreach (var item in Model)
         {
-            if (!item.CStatus.Equals("Completed"))
-            {
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.CDateTime)
@@ -62,7 +60,6 @@
                         }
                     </td>
                 </tr>
-            }
         }
     }
 
