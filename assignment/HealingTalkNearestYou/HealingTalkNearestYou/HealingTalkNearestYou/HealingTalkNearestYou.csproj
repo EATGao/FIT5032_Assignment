@@ -389,6 +389,7 @@
     <Content Include="Views\Psychologist\Edit.cshtml" />
     <Content Include="Views\Psychologist\Details.cshtml" />
     <Content Include="Views\Patient\Rate.cshtml" />
+    <Content Include="Views\Account\UserProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\EmailSender\" />

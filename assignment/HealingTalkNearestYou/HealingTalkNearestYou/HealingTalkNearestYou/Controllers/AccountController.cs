@@ -176,5 +176,10 @@ namespace HealingTalkNearestYou.Controllers
             return RedirectToAction("Login", "Account");
         }
 
+        public ActionResult UserProfile()
+        {
+            return View();
+        }
+
     }
 }

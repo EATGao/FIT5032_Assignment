@@ -6,7 +6,7 @@
 
         <ul class="nav navbar-nav navbar-right">
             <li>
-                @Html.ActionLink("Hello " + User.Identity.Name + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                @Html.ActionLink("Hello " + User.Identity.Name + "!", "UserProfile", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
             </li>
             <li>@Html.ActionLink("Logout", "Logout", "Account", routeValues: null, htmlAttributes: new { id = "logoutLink" })</li>
         </ul>
