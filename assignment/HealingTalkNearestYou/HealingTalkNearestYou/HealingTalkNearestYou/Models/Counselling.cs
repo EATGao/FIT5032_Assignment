@@ -15,7 +15,7 @@ namespace HealingTalkNearestYou.Models
     public partial class Counselling
     {
         public int CId { get; set; }
-        public string CDateTime { get; set; }
+        public System.DateTime CDateTime { get; set; }
         public Nullable<int> CRate { get; set; }
         public string CStatus { get; set; }
         public int PsychologistPsyId { get; set; }

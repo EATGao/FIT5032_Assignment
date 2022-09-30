@@ -40,7 +40,7 @@
       <PropertyRef Name="CId" />
     </Key>
     <Property Name="CId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="CDateTime" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CDateTime" Type="datetime" Nullable="false" />
     <Property Name="CRate" Type="int" Nullable="true" />
     <Property Name="CStatus" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PsychologistPsyId" Type="int" Nullable="false" />

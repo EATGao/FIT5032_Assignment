@@ -41,7 +41,7 @@
       <PropertyRef Name="CId" />
     </Key>
     <Property Name="CId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CDateTime" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="CDateTime" Type="DateTime" Nullable="false" />
     <Property Name="CRate" Type="Int32" Nullable="true" />
     <Property Name="CStatus" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="Psychologist" Relationship="HTNY.PsychologistCounselling" FromRole="Counselling" ToRole="Psychologist" />

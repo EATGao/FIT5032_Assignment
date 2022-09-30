@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 09/16/2022 17:45:18
+-- Date Created: 09/29/2022 23:05:07
 -- Generated from EDMX file: D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\Models\HTNY.edmx
 -- --------------------------------------------------
 
@@ -69,7 +69,7 @@ GO
 -- Creating table 'CounsellingSet'
 CREATE TABLE [dbo].[CounsellingSet] (
     [CId] int IDENTITY(1,1) NOT NULL,
-    [CDateTime] nvarchar(max)  NOT NULL,
+    [CDateTime] datetime  NOT NULL,
     [CRate] int  NULL,
     [CStatus] nvarchar(max)  NOT NULL,
     [PsychologistPsyId] int  NOT NULL,

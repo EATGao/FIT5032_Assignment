@@ -1,7 +1,52 @@
-﻿
+﻿@model IEnumerable<HealingTalkNearestYou.Models.Counselling>
+
 @{
     ViewBag.Title = "BookCounselling";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>BookCounselling</h2>
 
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Psychologist.PsyFirstName)
+        </th>
+        <th>
+            Operation
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CDateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Psychologist.PsyFirstName)
+                @Html.DisplayFor(modelItem => item.Psychologist.PsyLastName)
+            </td>
+            <td>
+                @if (item.CStatus.Equals("Not Booked"))
+                {
+                    @Html.ActionLink("Book", "Book", new { id = item.CId })
+                }
+                else
+                {
+                    <p>Booked</p>
+                }
+            </td>
+        </tr>
+     }
+
+</table>

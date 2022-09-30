@@ -32,12 +32,13 @@
                 {
                     if (User.IsInRole("Patient"))
                     {
-                        <ul class="nav navbar-nav">
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                            <li>@Html.ActionLink("Book Counselling", "BookCounselling", "Booking")</li>
-                        </ul>
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                <li>@Html.ActionLink("About", "About", "Home")</li>
+                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                <li>@Html.ActionLink("Book Counselling", "BookCounselling", "Patient")</li>
+                <li>@Html.ActionLink("Counselling History", "History", "Patient")</li>
+            </ul>
                     }
                     else if (User.IsInRole("Psychologist"))
                     {

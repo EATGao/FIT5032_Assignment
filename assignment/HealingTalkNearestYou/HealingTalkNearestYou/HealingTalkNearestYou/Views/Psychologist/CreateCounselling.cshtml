@@ -1,0 +1,63 @@
+﻿@model HealingTalkNearestYou.Models.Counselling
+
+@{
+    ViewBag.Title = "CreateCounselling";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h2>Create Counselling</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Counselling</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.CDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CDateTime, new { htmlAttributes = new { @class = "form-control datetimepicker" } })
+                @Html.ValidationMessageFor(model => model.CDateTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.CStatus, ViewBag.StatusOptions as IEnumerable<SelectListItem>, new { @class = "form-control selectWidth" })
+                @Html.ValidationMessageFor(model => model.CStatus, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PsychologistPsyId, "PsychologistPsyId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PsychologistPsyId, new { htmlAttributes = new { @Value = 6 } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/moment")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/datetime")
+}

@@ -15,9 +15,9 @@ namespace HealingTalkNearestYou.Controllers
         public ActionResult Login()
         {
             var selectUserTypeList = new List<SelectListItem>() {
-                new SelectListItem() { Value = "Admin", Text = "Admin" },
-                new SelectListItem() { Value = "Patient", Text = "Patient" },
-                new SelectListItem() { Value = "Pychologist", Text = "Pychologist" }
+                new SelectListItem() { Value = "1", Text = "Admin" },
+                new SelectListItem() { Value = "2", Text = "Patient" },
+                new SelectListItem() { Value = "3", Text = "Pychologist" }
             };
 
             ViewBag.UserTypeOptions = selectUserTypeList;
@@ -30,7 +30,7 @@ namespace HealingTalkNearestYou.Controllers
             if (ModelState.IsValid)
             {
                 UserRepository userRepository = new UserRepository();
-                if (model.UserType == "Admin")
+                if (model.UserType == "1")
                 {
                     AdminViewModel adminViewModel = userRepository.AdminValidate(model);
                     if (adminViewModel == null)
@@ -49,7 +49,7 @@ namespace HealingTalkNearestYou.Controllers
                         return RedirectToAction("Index", "Home");
                     }
                 }
-                else if (model.UserType == "Patient")
+                else if (model.UserType == "2")
                 {
                     PatientViewModel patientViewModel = userRepository.PatientValidate(model);
                     if (patientViewModel == null)
@@ -67,7 +67,7 @@ namespace HealingTalkNearestYou.Controllers
                         return RedirectToAction("Index", "Home");
                     }
                 }
-                else if (model.UserType == "Psychologist")
+                else if (model.UserType == "3")
                 {
                     PsychologistViewModel psychologistViewModel = userRepository.PsychologistValidate(model);
                     if (psychologistViewModel == null)
@@ -103,8 +103,8 @@ namespace HealingTalkNearestYou.Controllers
 
             var selectGenderTypeList = new List<SelectListItem>() {
                 //new SelectListItem() { Value = "1", Text = "Admin" },
-                new SelectListItem() { Value = "1", Text = "Female" },
-                new SelectListItem() { Value = "2", Text = "Male" }
+                new SelectListItem() { Value = "Female", Text = "Female" },
+                new SelectListItem() { Value = "Male", Text = "Male" }
             };
 
             ViewBag.UserTypeOptions = selectUserTypeList;

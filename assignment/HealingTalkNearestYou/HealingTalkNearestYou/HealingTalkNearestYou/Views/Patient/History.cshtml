@@ -1,0 +1,47 @@
+﻿@model IEnumerable<HealingTalkNearestYou.Models.Counselling>
+
+@{
+    ViewBag.Title = "History";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>History</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Psychologist.PsyFirstName)
+        </th>
+        <th>
+            Rate
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CDateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Psychologist.PsyFirstName)
+            @Html.DisplayFor(modelItem => item.Psychologist.PsyLastName)
+        </td>
+        <td>
+            @Html.ActionLink("Rate", "Rate", new { id = item.CId })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -33,8 +34,15 @@ namespace HealingTalkNearestYou.Controllers
         [HttpPost]
         public ActionResult EditPatient(Patient patient)
         {
-            htny_DB.Entry<Patient>(patient).State = System.Data.Entity.EntityState.Modified;
-            htny_DB.SaveChanges();
+            try
+            {
+                htny_DB.Entry<Patient>(patient).State = System.Data.Entity.EntityState.Modified;
+                htny_DB.SaveChanges();
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                Console.Write(dbEx);
+            }
             return RedirectToAction("ManagePatient");
         }
 
@@ -50,7 +58,7 @@ namespace HealingTalkNearestYou.Controllers
                 htny_DB.PatientSet.Remove(patient);
                 htny_DB.SaveChanges();
             }
-            return View();
+            return RedirectToAction("ManagePatient");
         }
 
         public ActionResult ManagePsychologist()
@@ -71,8 +79,10 @@ namespace HealingTalkNearestYou.Controllers
         [HttpPost]
         public ActionResult EditPsy(Psychologist psy)
         {
-            htny_DB.Entry<Psychologist>(psy).State = System.Data.Entity.EntityState.Modified;
-            htny_DB.SaveChanges();
+
+                htny_DB.Entry<Psychologist>(psy).State = System.Data.Entity.EntityState.Modified;
+                htny_DB.SaveChanges();
+            
             return RedirectToAction("ManagePsychologist");
         }
 
@@ -95,7 +105,7 @@ namespace HealingTalkNearestYou.Controllers
                 htny_DB.SaveChanges();
             }
 
-            return View();
+            return RedirectToAction("ManagePsychologist");
         }
     }
 }

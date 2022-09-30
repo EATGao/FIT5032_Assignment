@@ -1,4 +1,5 @@
-﻿
+﻿@model IEnumerable<HealingTalkNearestYou.Models.Counselling>
+
 @{
     ViewBag.Title = "ManageCounselling";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,3 +7,52 @@
 
 <h2>ManageCounselling</h2>
 
+<p>
+    @Html.ActionLink("Create New", "CreateCounselling")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CRate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Psychologist.PsyEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Patient.PatientEmail)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CDateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CRate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Psychologist.PsyEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Patient.PatientEmail)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CId })
+        </td>
+    </tr>
+}
+
+</table>
