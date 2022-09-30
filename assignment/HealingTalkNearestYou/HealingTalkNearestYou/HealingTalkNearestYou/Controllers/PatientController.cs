@@ -1,11 +1,11 @@
 ﻿using HealingTalkNearestYou.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using HealingTalkNearestYou.CustomSecurity;
+using HealingTalkNearestYou.Util;
+
 
 namespace HealingTalkNearestYou.Controllers
 {
@@ -65,6 +65,11 @@ namespace HealingTalkNearestYou.Controllers
             htny_DB.Entry<Counselling>(counselling).State = System.Data.Entity.EntityState.Modified;
             htny_DB.SaveChanges();
 
+            //send Email to patient
+            string content = "Hi, You have booked a counselling of Psychologist " + counselling.Psychologist.PsyName + " at " + counselling.CDateTime + "\n";
+            EmailSender emailSender = new EmailSender();
+            emailSender.Send("ygao0096@student.monash.edu", "Your Booking Result", content);
+
             return RedirectToAction("BookCounselling");
         }
 
@@ -104,9 +109,22 @@ namespace HealingTalkNearestYou.Controllers
             return View(counsellings.ToPagedList(pageNumber ?? 1, 10));
         }
 
-        public ActionResult Rate() 
+        public ActionResult Rate(int id) 
         {
-            return RedirectToAction("BookCounselling");
+
+            ViewBag.cousellingId = id;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Rate(int cid, int scores)
+        {
+            Counselling counselling = htny_DB.CounsellingSet.Find(cid);
+            counselling.CRate = scores;
+            htny_DB.Entry<Counselling>(counselling).State = System.Data.Entity.EntityState.Modified;
+            htny_DB.SaveChanges();
+
+            return RedirectToAction("History");
         }
     }
 }

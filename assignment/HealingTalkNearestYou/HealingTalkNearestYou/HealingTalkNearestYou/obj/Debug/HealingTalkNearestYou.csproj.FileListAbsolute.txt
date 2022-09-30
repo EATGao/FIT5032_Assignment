@@ -76,7 +76,6 @@ D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNeares
 D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\System.Web.WebPages.xml
 D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\System.Web.WebPages.Deployment.xml
 D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\System.Web.WebPages.Razor.xml
-D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\Newtonsoft.Json.xml
 D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\Antlr3.Runtime.pdb
 D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\System.Net.Http.Formatting.xml
 D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\System.Web.Http.xml
@@ -91,3 +90,7 @@ D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNeares
 D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\PagedList.Mvc.dll
 D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\PagedList.xml
 D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\PagedList.Mvc.xml
+D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\SendGrid.dll
+D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\StarkbankEcdsa.dll
+D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\SendGrid.pdb
+D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\SendGrid.xml

@@ -1,0 +1,70 @@
+﻿@model HealingTalkNearestYou.Models.Counselling
+
+@{
+    ViewBag.Title = "Rate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    function RateScore() {
+        var score = $("#finalScore").val();
+        for (var i = 1; i <= score; i++) {
+            $("#star" + i).attr('class', 'glyphicon glyphicon-star');
+        }
+
+    }
+    function RateOut(num) {
+        for (var i = 1; i <= num; i++) {
+            $("#star" + i).attr('class', 'glyphicon glyphicon-star-empty');
+        }
+    }
+    function RateOver(num) {
+        for (var i = 1; i <= num; i++) {
+            $("#star" + i).attr('class', 'glyphicon glyphicon-star');
+        }
+    }
+    function RateClick(num) {
+        $("#finalScore").val(num);
+        for (var i = 1; i <= num; i++) {
+            $("#star" + i).attr('class', 'glyphicon glyphicon-star');
+        }
+        for (var i = num + 1; i < 5; i++) {
+            $("#star" + i).attr('class', 'glyphicon glyphicon-star-empty');
+        }
+    }
+
+    function VerifiedScore() {
+        var score = $("#finalScore").val();
+        if (score == "0") {
+            alert("Rate is required.")
+            return false;
+        } 
+    }
+</script>
+
+<h2>Rate Psychologist</h2>
+
+@using (Html.BeginForm("Rate", "Patient", FormMethod.Post, new { onsubmit = "return VerifiedScore()"  }))
+{
+    <p>Have you seen the psychologist? If yes, give him/her some feedback please.</p>
+    <p>1 star for "Really Bad"</p>
+    <p>2 star for "Bad"</p>
+    <p>3 star for "Normal"</p>
+    <p>4 star for "Good"</p>
+    <p>5 star for "Awesome"</p>
+    <br />
+    <br />
+    <div onmouseout="RateScore()">
+        <span id="star1" onmouseout="RateOut(1)" onmouseover="RateOver(1)" onclick="RateClick(1)" class="glyphicon glyphicon-star-empty"></span>
+        <span id="star2" onmouseout="RateOut(2)" onmouseover="RateOver(2)" onclick="RateClick(2)" class="glyphicon glyphicon-star-empty"></span>
+        <span id="star3" onmouseout="RateOut(3)" onmouseover="RateOver(3)" onclick="RateClick(3)" class="glyphicon glyphicon-star-empty"></span>
+        <span id="star4" onmouseout="RateOut(4)" onmouseover="RateOver(4)" onclick="RateClick(4)" class="glyphicon glyphicon-star-empty"></span>
+        <span id="star5" onmouseout="RateOut(5)" onmouseover="RateOver(5)" onclick="RateClick(5)" class="glyphicon glyphicon-star-empty"></span>
+    </div>
+    <div>
+        <input type="hidden" name="scores" id="finalScore" value="0" />
+        <input type="hidden" name="cid" id="finalScore" value="@ViewBag.cousellingId" />
+    </div>
+    <div>
+        <input type="submit" class="btn btn-primary active" name="Rate" value="Save rate"/>
+    </div> 
+}
