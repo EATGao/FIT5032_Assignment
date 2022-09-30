@@ -34,6 +34,7 @@
                     @Html.LabelFor(m => m.UserType, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
                         @Html.DropDownListFor(m => m.UserType, ViewBag.UserTypeOptions as IEnumerable<SelectListItem>, new { @class = "form-control selectWidth" })
+                        @Html.ValidationMessageFor(m => m.UserType, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">

@@ -87,3 +87,7 @@ D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNeares
 D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\obj\Debug\HealingTalkNearestYou.csproj.CopyComplete
 D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\obj\Debug\HealingTalkNearestYou.dll
 D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\obj\Debug\HealingTalkNearestYou.pdb
+D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\PagedList.dll
+D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\PagedList.Mvc.dll
+D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\PagedList.xml
+D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\bin\PagedList.Mvc.xml

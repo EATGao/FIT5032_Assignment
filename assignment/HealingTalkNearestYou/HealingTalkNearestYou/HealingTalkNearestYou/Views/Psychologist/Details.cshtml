@@ -1,0 +1,61 @@
+﻿@model HealingTalkNearestYou.Models.Counselling
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Counselling</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Counselling Time
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CDateTime)
+        </dd>
+
+        <dt>
+            Rate
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CRate)
+        </dd>
+
+        <dt>
+            Status
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CStatus)
+        </dd>
+
+        <dt>
+            Psychologist Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Psychologist.PsyFirstName)
+            @Html.DisplayFor(model => model.Psychologist.PsyLastName)
+        </dd>
+
+        <dt>
+            Patient Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Patient.PatientFirstName)
+            @Html.DisplayFor(model => model.Patient.PatientLastName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CId }) |
+    @Html.ActionLink("Back to List", "ManageCounselling")
+</p>

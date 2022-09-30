@@ -14,6 +14,7 @@ namespace HealingTalkNearestYou.Controllers
         public ActionResult BookCounselling()
         {
             IEnumerable<Counselling> allCounsellings = htny_DB.CounsellingSet;
+
             //IEnumerable<Counselling> uncompleteCounsellings = new List<Counselling>();
             //foreach (Counselling counselling in allCounsellings)
             //{
