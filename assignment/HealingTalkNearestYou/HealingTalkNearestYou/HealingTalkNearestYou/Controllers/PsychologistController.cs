@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using HealingTalkNearestYou.CustomSecurity;
 using HealingTalkNearestYou.Models;
+using HealingTalkNearestYou.Util;
 using PagedList;
 
 namespace HealingTalkNearestYou.Controllers
@@ -15,10 +17,12 @@ namespace HealingTalkNearestYou.Controllers
     public class PsychologistController : Controller
     {
         HTNYContainer1 htny_DB = new HTNYContainer1();
+        CounsellingManager counsellingManager = new CounsellingManager();
 
         // GET: Psychologist
         public ActionResult ManageCounselling(string search, int? pageNumber, string sort)
         {
+            counsellingManager.cleanPassedCounselling();
             ViewBag.SortByTime = string.IsNullOrEmpty(sort) ? "ascending time" : "";
             ViewBag.SortByStatus = sort == "Status" ? "descending status" : "ascending status";
 
@@ -57,13 +61,18 @@ namespace HealingTalkNearestYou.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateCounselling(Counselling counselling)
+        public ActionResult CreateCounselling(String dateTime)
         {
-            if (ModelState.IsValid)
-            {
-                htny_DB.CounsellingSet.Add(counselling);
-                htny_DB.SaveChanges();
-            }
+            CultureInfo culture = CultureInfo.CurrentCulture;
+            DateTime cDateTime = DateTime.Parse(dateTime, culture);
+            Counselling counselling = new Counselling();
+            counselling.CDateTime = cDateTime;
+            counselling.CStatus = "Not Booked";
+            var psys = htny_DB.PsychologistSet.AsQueryable();
+            List<Psychologist> psy = psys.Where(p => p.PsyEmail == User.Identity.Name).ToList();
+            counselling.Psychologist = psy.FirstOrDefault();
+            htny_DB.CounsellingSet.Add(counselling);
+            htny_DB.SaveChanges();
             return RedirectToAction("ManageCounselling");
         }
 
@@ -73,7 +82,6 @@ namespace HealingTalkNearestYou.Controllers
             var selecStatusList = new List<SelectListItem>() {
                 new SelectListItem() { Value = "Not Booked", Text = "Not Booked" },
                 new SelectListItem() { Value = "Booked", Text = "Booked" },
-                new SelectListItem() { Value = "Completed", Text = "Completed" }
             };
             ViewBag.StatusOptions = selecStatusList;
             return View(counselling);

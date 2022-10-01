@@ -14,9 +14,11 @@ namespace HealingTalkNearestYou.Controllers
     public class PatientController : Controller
     {
         HTNYContainer1 htny_DB = new HTNYContainer1();
+        CounsellingManager counsellingManager = new CounsellingManager();
         // GET: Patient
         public ActionResult BookCounselling(string search, int? pageNumber, string sort)
         {
+            counsellingManager.cleanPassedCounselling();
             var counsellings = htny_DB.CounsellingSet.AsQueryable();
             counsellings = counsellings.Where(c => c.CStatus != "Completed");
             ViewBag.SortByTime = string.IsNullOrEmpty(sort) ? "ascending time" : "";
