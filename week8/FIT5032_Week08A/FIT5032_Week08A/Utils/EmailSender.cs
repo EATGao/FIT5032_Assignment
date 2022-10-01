@@ -11,7 +11,7 @@ namespace FIT5032_Week08A.Utils
     public class EmailSender
     {
         // Please use your API KEY here.
-        private const String API_KEY = "YOUR API KEY HERE";
+        private const String API_KEY = "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";
 
         public void Send(String toEmail, String subject, String contents)
         {
