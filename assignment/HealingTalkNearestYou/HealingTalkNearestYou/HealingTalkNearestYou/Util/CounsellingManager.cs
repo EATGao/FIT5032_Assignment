@@ -8,17 +8,17 @@ namespace HealingTalkNearestYou.Util
 {
     public class CounsellingManager
     {
-        HTNYContainer1 htny_DB = new HTNYContainer1();
+        ApplicationDbContext htny_DB = new ApplicationDbContext();
 
         public void cleanPassedCounselling()
         {
-            List<Counselling> counsellings = htny_DB.CounsellingSet.ToList();
+            List<Counselling> counsellings = htny_DB.Counsellings.ToList();
 
             foreach (Counselling c in counsellings)
             {
                 if (c.CStatus == "Not Booked" && (DateTime.Compare(c.CDateTime, DateTime.Now) < 0))
                 {
-                    htny_DB.CounsellingSet.Remove(c);
+                    htny_DB.Counsellings.Remove(c);
                     htny_DB.SaveChanges();
                 }
             }

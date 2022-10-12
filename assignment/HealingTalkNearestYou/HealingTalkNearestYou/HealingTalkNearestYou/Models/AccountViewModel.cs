@@ -23,6 +23,10 @@ namespace HealingTalkNearestYou.Models
         public string UserType { get; set; }
     }
 
+    public class ExternalLoginListViewModel
+    {
+        public string ReturnUrl { get; set; }
+    }
     public class RegisterAdminViewModel
     {
         [Required]

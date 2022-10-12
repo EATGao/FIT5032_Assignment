@@ -3,29 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using PagedList;
-using HealingTalkNearestYou.CustomSecurity;
 using HealingTalkNearestYou.Util;
 
 
 namespace HealingTalkNearestYou.Controllers
 {
-    [CustomAuthentication]
-    [CustomAuthorization(UserType = "Patient")]
+    [Authorize(Roles = "Patient")]
     public class PatientController : Controller
     {
-        HTNYContainer1 htny_DB = new HTNYContainer1();
+        ApplicationDbContext htny_DB = new ApplicationDbContext();
         CounsellingManager counsellingManager = new CounsellingManager();
         // GET: Patient
         public ActionResult BookCounselling(string search, int? pageNumber, string sort)
         {
             counsellingManager.cleanPassedCounselling();
-            var counsellings = htny_DB.CounsellingSet.AsQueryable();
+            var counsellings = htny_DB.Counsellings.AsQueryable();
             counsellings = counsellings.Where(c => c.CStatus != "Completed");
             ViewBag.SortByTime = string.IsNullOrEmpty(sort) ? "ascending time" : "";
             ViewBag.SortByPsyName = sort == "Psychologist Name" ? "descending name" : "ascending name";
             ViewBag.SortByStatus = sort == "Status" ? "descending status" : "ascending status";
-            
-            counsellings = counsellings.Where(c => c.Psychologist.PsyName.StartsWith(search) || search == null);
+
+            counsellings = counsellings.Where(c => c.Psychologist.Name.StartsWith(search) || search == null);
 
             switch (sort)
             {
@@ -33,10 +31,10 @@ namespace HealingTalkNearestYou.Controllers
                     counsellings = counsellings.OrderBy(c => c.CDateTime);
                     break;
                 case "ascending name":
-                    counsellings = counsellings.OrderBy(c => c.Psychologist.PsyName);
+                    counsellings = counsellings.OrderBy(c => c.Psychologist.Name);
                     break;
                 case "descending name":
-                    counsellings = counsellings.OrderByDescending(c => c.Psychologist.PsyName);
+                    counsellings = counsellings.OrderByDescending(c => c.Psychologist.Name);
                     break;
                 case "descending status":
                     counsellings = counsellings.OrderByDescending(c => c.CStatus);
@@ -56,10 +54,10 @@ namespace HealingTalkNearestYou.Controllers
         public ActionResult Book(int id)
         {
             // get counselling
-            Counselling counselling = htny_DB.CounsellingSet.Find(id);
+            Counselling counselling = htny_DB.Counsellings.Find(id);
             // get patient user
-            List<Patient> result = htny_DB.PatientSet.Where(p => p.PatientEmail == User.Identity.Name).ToList();
-            Patient patient = result.FirstOrDefault();
+            List<ApplicationUser> result = htny_DB.Users.Where(p => p.Email == User.Identity.Name).ToList();
+            ApplicationUser patient = result.FirstOrDefault();
             // change counselling status and patient
             counselling.Patient = patient;
             counselling.CStatus = "Booked";
@@ -68,7 +66,7 @@ namespace HealingTalkNearestYou.Controllers
             htny_DB.SaveChanges();
 
             //send Email to patient
-            string content = "Hi, You have booked a counselling of Psychologist " + counselling.Psychologist.PsyName + " at " + counselling.CDateTime + "\n";
+            string content = "Hi, You have booked a counselling of at " + counselling.CDateTime + "\n";
             EmailSender emailSender = new EmailSender();
             emailSender.Send("ygao0096@student.monash.edu", "Your Booking Result", content);
 
@@ -77,13 +75,13 @@ namespace HealingTalkNearestYou.Controllers
 
         public ActionResult History(string search, int? pageNumber, string sort)
         {
-            var counsellings = htny_DB.CounsellingSet.AsQueryable();
-            counsellings = counsellings.Where(c => (c.CStatus == "Completed" || c.CStatus == "Booked") && c.Patient.PatientEmail == User.Identity.Name);
+            var counsellings = htny_DB.Counsellings.AsQueryable();
+            counsellings = counsellings.Where(c => (c.CStatus == "Completed" || c.CStatus == "Booked") && c.Patient.Email == User.Identity.Name);
             ViewBag.SortByTime = string.IsNullOrEmpty(sort) ? "ascending time" : "";
             ViewBag.SortByPsyName = sort == "Psychologist Name" ? "descending name" : "ascending name";
             ViewBag.SortByStatus = sort == "Status" ? "descending status" : "ascending status";
 
-            counsellings = counsellings.Where(c => c.Psychologist.PsyName.StartsWith(search) || search == null);
+            counsellings = counsellings.Where(c => c.Psychologist.Name.StartsWith(search) || search == null);
 
             switch (sort)
             {
@@ -91,10 +89,10 @@ namespace HealingTalkNearestYou.Controllers
                     counsellings = counsellings.OrderBy(c => c.CDateTime);
                     break;
                 case "ascending name":
-                    counsellings = counsellings.OrderBy(c => c.Psychologist.PsyName);
+                    counsellings = counsellings.OrderBy(c => c.Psychologist.Name);
                     break;
                 case "descending name":
-                    counsellings = counsellings.OrderByDescending(c => c.Psychologist.PsyName);
+                    counsellings = counsellings.OrderByDescending(c => c.Psychologist.Name);
                     break;
                 case "descending status":
                     counsellings = counsellings.OrderByDescending(c => c.CStatus);
@@ -111,7 +109,7 @@ namespace HealingTalkNearestYou.Controllers
             return View(counsellings.ToPagedList(pageNumber ?? 1, 10));
         }
 
-        public ActionResult Rate(int id) 
+        public ActionResult Rate(int id)
         {
 
             ViewBag.cousellingId = id;
@@ -121,7 +119,7 @@ namespace HealingTalkNearestYou.Controllers
         [HttpPost]
         public ActionResult Rate(int cid, int scores)
         {
-            Counselling counselling = htny_DB.CounsellingSet.Find(cid);
+            Counselling counselling = htny_DB.Counsellings.Find(cid);
             counselling.CRate = scores;
             htny_DB.Entry<Counselling>(counselling).State = System.Data.Entity.EntityState.Modified;
             htny_DB.SaveChanges();

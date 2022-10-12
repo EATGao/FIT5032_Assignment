@@ -13,12 +13,13 @@ namespace HealingTalkNearestYou.CustomSecurity
         // execute before action
         public void OnAuthentication(AuthenticationContext filterContext)
         {
+            // whether authenticated or not
             if (!filterContext.HttpContext.User.Identity.IsAuthenticated)
             {
                 filterContext.Result = new HttpUnauthorizedResult();
             }
         }
-
+        // after action, before generate result
         public void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
         {
             if (filterContext.Result == null || filterContext.Result is HttpUnauthorizedResult)

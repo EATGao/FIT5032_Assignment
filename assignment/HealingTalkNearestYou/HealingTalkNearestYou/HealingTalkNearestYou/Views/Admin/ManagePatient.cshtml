@@ -62,7 +62,7 @@
                     @Html.DisplayFor(modelItem => item.PatientGender)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PatientDOB)
+                    @Html.DisplayFor(modelItem => item.PatientDOB, "MyDate")
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "EditPatient", new { id = item.PatientId }) |

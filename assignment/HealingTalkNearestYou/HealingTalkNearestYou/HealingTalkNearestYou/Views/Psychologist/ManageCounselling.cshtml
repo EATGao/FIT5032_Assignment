@@ -28,9 +28,6 @@
             @Html.ActionLink("Status", "ManageCounselling", new { sort = ViewBag.SortByStatus, search = Request.QueryString["search"] })
         </th>
         <th>
-            Patient Name
-        </th>
-        <th>
             Operations
         </th>
     </tr>
@@ -44,22 +41,27 @@
     {
         foreach (var item in Model)
         {
-            <tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CDateTime, "MyDateTime")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CStatus)
+            </td>
+
+            @if (item.CStatus.Equals("Not Booked"))
+            {
                 <td>
-                    @Html.DisplayFor(modelItem => item.CDateTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CStatus)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Patient.PatientName)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.CId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.CId }) |
+                    @Html.ActionLink("Edit", "Edit", new { id = item.CId }) | 
+                    @Html.ActionLink("Details", "Details", new { id = item.CId }) | 
                     @Html.ActionLink("Delete", "Delete", new { id = item.CId })
                 </td>
-            </tr>
+            }
+            else
+            {
+                <td>@Html.ActionLink("Details", "Details", new { id = item.CId })</td>
+            }
+        </tr>
         }
     }
 

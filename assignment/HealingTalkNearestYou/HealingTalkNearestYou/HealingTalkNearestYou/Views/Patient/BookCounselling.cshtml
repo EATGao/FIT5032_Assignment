@@ -41,13 +41,13 @@
         {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.CDateTime)
+                        @Html.DisplayFor(modelItem => item.CDateTime, "MyDateTime")
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.CStatus)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Psychologist.PsyName)
+                        @Html.DisplayFor(modelItem => item.Psychologist.Name)
                     </td>
                     <td>
                         @if (item.CStatus.Equals("Not Booked"))

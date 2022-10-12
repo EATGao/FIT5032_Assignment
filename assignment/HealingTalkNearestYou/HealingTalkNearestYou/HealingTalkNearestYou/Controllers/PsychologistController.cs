@@ -1,34 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Globalization;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using HealingTalkNearestYou.CustomSecurity;
 using HealingTalkNearestYou.Models;
 using HealingTalkNearestYou.Util;
 using PagedList;
 
 namespace HealingTalkNearestYou.Controllers
 {
-    [CustomAuthentication]
-    [CustomAuthorization(UserType = "Psychologist")]
+    [Authorize(Roles = "Psychologist")]
     public class PsychologistController : Controller
     {
-        HTNYContainer1 htny_DB = new HTNYContainer1();
+        ApplicationDbContext htny_DB = new ApplicationDbContext();
         CounsellingManager counsellingManager = new CounsellingManager();
 
         // GET: Psychologist
         public ActionResult ManageCounselling(string search, int? pageNumber, string sort)
         {
             counsellingManager.cleanPassedCounselling();
-            ViewBag.SortByTime = string.IsNullOrEmpty(sort) ? "ascending time" : "";
+            ViewBag.SortByTime = string.IsNullOrEmpty(sort) ? "" : "ascending time";
             ViewBag.SortByStatus = sort == "Status" ? "descending status" : "ascending status";
 
-            var counsellings = htny_DB.CounsellingSet.AsQueryable();
-            counsellings = counsellings.Where(c => c.Psychologist.PsyEmail == User.Identity.Name);
-            counsellings = counsellings.Where(c => c.Patient.PatientName.StartsWith(search) || search == null);
+            var counsellings = htny_DB.Counsellings.AsQueryable();
+            counsellings = counsellings.Where(c => c.Psychologist.Email == User.Identity.Name);
+            counsellings = counsellings.Where(c => c.Patient.Name.StartsWith(search) || search == null);
             switch (sort)
             {
                 case "ascending time":
@@ -63,27 +62,32 @@ namespace HealingTalkNearestYou.Controllers
         [HttpPost]
         public ActionResult CreateCounselling(String dateTime)
         {
-            CultureInfo culture = CultureInfo.CurrentCulture;
-            DateTime cDateTime = DateTime.Parse(dateTime, culture);
-            Counselling counselling = new Counselling();
-            counselling.CDateTime = cDateTime;
-            counselling.CStatus = "Not Booked";
-            var psys = htny_DB.PsychologistSet.AsQueryable();
-            List<Psychologist> psy = psys.Where(p => p.PsyEmail == User.Identity.Name).ToList();
-            counselling.Psychologist = psy.FirstOrDefault();
-            htny_DB.CounsellingSet.Add(counselling);
-            htny_DB.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                CultureInfo culture = CultureInfo.CurrentCulture;
+                DateTime cDateTime = DateTime.Parse(dateTime, culture);
+                Counselling counselling = new Counselling();
+                counselling.CDateTime = cDateTime;
+                counselling.CStatus = "Not Booked";
+                var psys = htny_DB.Users.AsQueryable();
+                List<ApplicationUser> psy = psys.Where(p => p.Email == User.Identity.Name).ToList();
+                counselling.Psychologist = psy.FirstOrDefault();
+                htny_DB.Counsellings.Add(counselling);
+                htny_DB.SaveChanges();
+            }
+            
             return RedirectToAction("ManageCounselling");
+
         }
 
         public ActionResult Edit(int id)
-        { 
-            Counselling counselling = htny_DB.CounsellingSet.Find(id);
+        {
+            Counselling counselling = htny_DB.Counsellings.Find(id);
             var selecStatusList = new List<SelectListItem>() {
                 new SelectListItem() { Value = "Not Booked", Text = "Not Booked" },
                 new SelectListItem() { Value = "Booked", Text = "Booked" },
             };
-            ViewBag.StatusOptions = selecStatusList;
+            
             return View(counselling);
         }
 
@@ -92,26 +96,26 @@ namespace HealingTalkNearestYou.Controllers
         {
             try
             {
-                htny_DB.Entry<Counselling>(counselling).State = System.Data.Entity.EntityState.Modified;
+                htny_DB.Entry(counselling).State = EntityState.Modified;
                 htny_DB.SaveChanges();
             }
             catch (DbEntityValidationException dbEx)
             {
                 Console.Write(dbEx);
             }
-            return RedirectToAction("ManagePatient");
+            return RedirectToAction("ManageCounselling");
         }
 
         public ActionResult Delete(int id)
         {
-            Counselling counselling = htny_DB.CounsellingSet.Find(id);
+            Counselling counselling = htny_DB.Counsellings.Find(id);
             if (counselling == null)
             {
                 return RedirectToAction("ManageCounselling");
             }
             else
             {
-                htny_DB.CounsellingSet.Remove(counselling);
+                htny_DB.Counsellings.Remove(counselling);
                 htny_DB.SaveChanges();
             }
             return RedirectToAction("ManageCounselling");
@@ -119,7 +123,17 @@ namespace HealingTalkNearestYou.Controllers
 
         public ActionResult Details(int id)
         {
-            Counselling counselling = htny_DB.CounsellingSet.Find(id);
+            Counselling counselling = htny_DB.Counsellings.Find(id);
+
+            ViewBag.psyName = counselling.Psychologist.Name;
+            if (counselling.Patient != null)
+            {
+                ViewBag.patientName = counselling.Patient.Name;
+            }
+            else 
+            {
+                ViewBag.patientName = "-1";
+            }
             return View(counselling);
         }
 

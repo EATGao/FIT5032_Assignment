@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using HealingTalkNearestYou.CustomSecurity;
 
 namespace HealingTalkNearestYou.Controllers
 {
     public class HomeController : Controller
     {
-
         public ActionResult Index()
         {
             return View();
@@ -17,7 +15,7 @@ namespace HealingTalkNearestYou.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Healing Talk Nearet You description page.";
+            ViewBag.Message = "Your application description page.";
 
             return View();
         }
@@ -25,13 +23,6 @@ namespace HealingTalkNearestYou.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
-        [CustomAuthentication]
-        public ActionResult Booking()
-        {
 
             return View();
         }

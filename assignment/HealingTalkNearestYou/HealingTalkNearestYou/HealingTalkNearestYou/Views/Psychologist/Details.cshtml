@@ -37,10 +37,7 @@
             }
             else
             {
-                for (int i = 0; i < 5; i++)
-                {
-                    <span class="glyphicon glyphicon-star-empty"></span>
-                }
+                <text>No Rate Score</text>
             }
 
         </dd>
@@ -58,7 +55,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Psychologist.PsyName)
+            <p>@ViewBag.psyName</p>
         </dd>
 
         <dt>
@@ -66,7 +63,14 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Patient.PatientName)
+            @if (ViewBag.patientName.Equals("-1"))
+            {
+                <p>Nobody booked yet</p>
+            }
+            else 
+            { 
+                <p>@ViewBag.patientName</p>
+            }
         </dd>
 
     </dl>

@@ -1,0 +1,69 @@
+﻿@model IPagedList<HealingTalkNearestYou.Models.ApplicationUser>
+@using PagedList;
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "Manage Users";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Manage Users</h2>
+@using (Html.BeginForm("ManageUser", "Admin", FormMethod.Get))
+{
+    <b> Search For: </b>
+    @Html.TextBox("search")
+    <input type="submit" name="submit" value="Search" />
+}
+<table class="table">
+    <tr>
+        <th>
+            Email
+        </th>
+        <th>
+            @Html.ActionLink("Name", "ManageUser", new { sort = ViewBag.SortByName, search = Request.QueryString["search"] })
+        </th>
+        <th>
+            @Html.ActionLink("Gender", "ManageUser", new { sort = ViewBag.SortByGender, search = Request.QueryString["search"] })
+        </th>
+        <th>
+            @Html.ActionLink("Date of Birth", "ManageUser", new { sort = ViewBag.SortByDOB, search = Request.QueryString["search"] })
+        </th>
+        <th>
+            Operation
+        </th>
+    </tr>
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="3">No user records</td>
+        </tr>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Email)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Gender)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.DOB, "MyDate")
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "EditUser", new { id = item.Id }) |
+        @Html.ActionLink("Detail", "DetailUser", new { id = item.Id }) |
+        @Html.ActionLink("Delete", "DeleteUser", new { id = item.Id })
+    </td>
+</tr>
+        }
+    }
+
+</table>
+@Html.PagedListPager(Model, pageNumber => Url.Action("ManageUser", new{pageNumber, search = Request.QueryString["search"], sort = Request.QueryString["sort"]}))

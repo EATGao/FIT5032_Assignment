@@ -8,7 +8,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
-using HealingTalkNearestYou.CustomSecurity;
+using System.Web.SessionState;
 
 namespace HealingTalkNearestYou
 {
@@ -23,26 +23,10 @@ namespace HealingTalkNearestYou
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 
-        protected void Application_BeginRequest() 
+        protected void Application_BeginRequest()
         {
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
-        }
-
-        protected void Application_PostAuthenticateRequest(object sender, EventArgs e)
-        {
-            HttpCookie cookie = Request.Cookies.Get(FormsAuthentication.FormsCookieName);
-            if (cookie != null)
-            {
-                FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(cookie.Value);
-                string userData = ticket.UserData;
-                string[] udata = userData.Split('|');
-
-                CustomPrincipal user = new CustomPrincipal(udata[0]);
-                user.UserType = udata[1];
-
-                HttpContext.Current.User = user;
-            }
         }
     }
 }
