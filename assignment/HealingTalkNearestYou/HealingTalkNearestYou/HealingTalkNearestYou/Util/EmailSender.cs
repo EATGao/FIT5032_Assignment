@@ -1,6 +1,7 @@
 ﻿using SendGrid;
 using SendGrid.Helpers.Mail;
 using System;
+using System.Collections.Generic;
 using System.Web;
 
 namespace HealingTalkNearestYou.Util
@@ -23,6 +24,22 @@ namespace HealingTalkNearestYou.Util
                 msg.AddAttachment(fileName, fileContent);
             }
             var response = client.SendEmailAsync(msg);
+        }
+
+        public void SendAnnouncementToAll(List<EmailAddress> tos, String subject, String contents, string fileName = null, string fileContent = null)
+        {
+            var client = new SendGridClient(API_KEY);
+            var from = new EmailAddress("gaoyurong923@gmail.com", "HTNY");
+            var plainTextContent = contents;
+            var htmlContent = "<p>" + contents + "</p>";
+            var msg = MailHelper.CreateSingleEmailToMultipleRecipients(from, tos, subject, plainTextContent, htmlContent);
+
+            if (fileName != null && fileContent != null)
+            {
+                msg.AddAttachment(fileName, fileContent);
+            }
+            var response = client.SendEmailAsync(msg);
+
         }
     }
 }

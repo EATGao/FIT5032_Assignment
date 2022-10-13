@@ -9,8 +9,11 @@
 }
 
 <h2>Manage Users</h2>
+@Html.ActionLink("Send Announcement", "SendAnnouncement")
+
 @using (Html.BeginForm("ManageUser", "Admin", FormMethod.Get))
 {
+    @Html.AntiForgeryToken()
     <b> Search For: </b>
     @Html.TextBox("search")
     <input type="submit" name="submit" value="Search" />
@@ -43,27 +46,27 @@
     {
         foreach (var item in Model)
         {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Email)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Name)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Gender)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.DOB, "MyDate")
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "EditUser", new { id = item.Id }) |
-        @Html.ActionLink("Detail", "DetailUser", new { id = item.Id }) |
-        @Html.ActionLink("Delete", "DeleteUser", new { id = item.Id })
-    </td>
-</tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DOB, "MyDate")
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditUser", new { id = item.Id }) |
+                    @Html.ActionLink("Detail", "DetailUser", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "DeleteUser", new { id = item.Id })
+                </td>
+            </tr>
         }
     }
 
 </table>
-@Html.PagedListPager(Model, pageNumber => Url.Action("ManageUser", new{pageNumber, search = Request.QueryString["search"], sort = Request.QueryString["sort"]}))
+@Html.PagedListPager(Model, pageNumber => Url.Action("ManageUser", new { pageNumber, search = Request.QueryString["search"], sort = Request.QueryString["sort"] }))

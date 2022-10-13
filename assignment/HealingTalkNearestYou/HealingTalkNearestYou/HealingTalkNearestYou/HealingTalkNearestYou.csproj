@@ -329,6 +329,7 @@
     <Content Include="Views\Psychologist\UploadFeedback.cshtml" />
     <Content Include="Views\Psychologist\BookedCounselling.cshtml" />
     <Content Include="Views\Psychologist\EditBookedCounselling.cshtml" />
+    <Content Include="Views\Admin\SendAnnouncement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -1,12 +1,16 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
+using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using HealingTalkNearestYou.Models;
+using HealingTalkNearestYou.Util;
 using PagedList;
-
+using SendGrid.Helpers.Mail;
 
 namespace HealingTalkNearestYou.Controllers
 {
@@ -100,6 +104,42 @@ namespace HealingTalkNearestYou.Controllers
             {
                 htny_DB.Users.Remove(user);
                 htny_DB.SaveChanges();
+            }
+            return RedirectToAction("ManageUser");
+        }
+
+        public ActionResult SendAnnouncement()
+        { 
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult SendAnnouncement(string content, HttpPostedFileBase postedFile = null)
+        {
+            EmailSender emailSender = new EmailSender();
+            List<EmailAddress> tos = new List<EmailAddress>();
+            if (postedFile != null)
+            {
+                TryValidateModel(postedFile);
+                if (ModelState.IsValid)
+                {
+                    //change to base64
+                    Stream str = postedFile.InputStream;
+                    BinaryReader Br = new BinaryReader(str);
+                    Byte[] bytes = Br.ReadBytes((Int32)str.Length);
+                    string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
+
+                    // get all patient and psychologist email here
+                    tos.Add(new EmailAddress("ygao0096@student.monash.edu", ""));
+                    emailSender.SendAnnouncementToAll(tos, "HTNY Announcement", content,
+                        Path.GetFileName(postedFile.FileName), base64String);
+                }
+            }
+            else 
+            {
+                // get all patient and psychologist email here
+                tos.Add(new EmailAddress("ygao0096@student.monash.edu", ""));
+                emailSender.SendAnnouncementToAll(tos, "HTNY Announcement", content);
             }
             return RedirectToAction("ManageUser");
         }
