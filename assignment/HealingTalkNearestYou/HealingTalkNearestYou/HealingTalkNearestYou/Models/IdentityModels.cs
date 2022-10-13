@@ -37,6 +37,8 @@ namespace HealingTalkNearestYou.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public virtual DbSet<UploadFile> UploadFiles { get; set; }
+
         public virtual DbSet<Counselling> Counsellings { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

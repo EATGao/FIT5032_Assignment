@@ -221,9 +221,26 @@
     <Compile Include="Migrations\202210111433062_third.designer.cs">
       <DependentUpon>202210111433062_third.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202210120217523_addEndDateTime.cs" />
+    <Compile Include="Migrations\202210120217523_addEndDateTime.designer.cs">
+      <DependentUpon>202210120217523_addEndDateTime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202210130312591_addFileEntity.cs" />
+    <Compile Include="Migrations\202210130312591_addFileEntity.designer.cs">
+      <DependentUpon>202210130312591_addFileEntity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202210130321246_changeEntityName.cs" />
+    <Compile Include="Migrations\202210130321246_changeEntityName.designer.cs">
+      <DependentUpon>202210130321246_changeEntityName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202210130833383_addFileContent.cs" />
+    <Compile Include="Migrations\202210130833383_addFileContent.designer.cs">
+      <DependentUpon>202210130833383_addFileContent.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Counselling.cs" />
+    <Compile Include="Models\UploadFile.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -307,8 +324,11 @@
     <Content Include="Views\Psychologist\Details.cshtml" />
     <Content Include="Views\Psychologist\ManageCounselling.cshtml" />
     <Content Include="Views\Admin\DetailUser.cshtml" />
-    <Content Include="Views\Psychologist\Edit.cshtml" />
+    <Content Include="Views\Psychologist\EditUnbookedCounselling.cshtml" />
     <Content Include="Views\Admin\EditUser.cshtml" />
+    <Content Include="Views\Psychologist\UploadFeedback.cshtml" />
+    <Content Include="Views\Psychologist\BookedCounselling.cshtml" />
+    <Content Include="Views\Psychologist\EditBookedCounselling.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -333,6 +353,22 @@
     <EmbeddedResource Include="Migrations\202210111433062_third.resx">
       <DependentUpon>202210111433062_third.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202210120217523_addEndDateTime.resx">
+      <DependentUpon>202210120217523_addEndDateTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202210130312591_addFileEntity.resx">
+      <DependentUpon>202210130312591_addFileEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202210130321246_changeEntityName.resx">
+      <DependentUpon>202210130321246_changeEntityName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202210130833383_addFileContent.resx">
+      <DependentUpon>202210130833383_addFileContent.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Uploads\" />
+    <Folder Include="Views\UploadFile\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

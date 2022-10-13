@@ -14,8 +14,12 @@ namespace HealingTalkNearestYou.Models
         public int CId { get; set; }
 
         [Required]
-        [Display(Name = "Date and Time")]
+        [Display(Name = "Start At")]
         public DateTime CDateTime { get; set; }
+
+        [Required]
+        [Display(Name = "End At")]
+        public DateTime CEndDateTime { get; set; }
 
         [Display(Name = "Rate")]
         public int? CRate { get; set; }
@@ -27,5 +31,6 @@ namespace HealingTalkNearestYou.Models
         [Required]
         public virtual ApplicationUser Psychologist { get; set; }
         public virtual ApplicationUser Patient { get; set; }
+        public virtual UploadFile FeedbackFile { get; set; }
     }
 }

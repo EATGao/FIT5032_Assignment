@@ -16,7 +16,7 @@ namespace HealingTalkNearestYou.Util
 
             foreach (Counselling c in counsellings)
             {
-                if (c.CStatus == "Not Booked" && (DateTime.Compare(c.CDateTime, DateTime.Now) < 0))
+                if (c.CStatus.Equals("Not Booked") && (DateTime.Compare(c.CDateTime, DateTime.Now) < 0))
                 {
                     htny_DB.Counsellings.Remove(c);
                     htny_DB.SaveChanges();

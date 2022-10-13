@@ -73,6 +73,12 @@ namespace HealingTalkNearestYou.Controllers
             return RedirectToAction("BookCounselling");
         }
 
+        public ActionResult uploadFiles(int id)
+        {
+            Counselling counselling = htny_DB.Counsellings.Find(id);
+            return View();
+        }
+
         public ActionResult History(string search, int? pageNumber, string sort)
         {
             var counsellings = htny_DB.Counsellings.AsQueryable();
@@ -125,6 +131,14 @@ namespace HealingTalkNearestYou.Controllers
             htny_DB.SaveChanges();
 
             return RedirectToAction("History");
+        }
+
+        [HttpGet]
+        public FileResult CheckFeedback(int id)
+        {
+            UploadFile file = htny_DB.UploadFiles.Find(id);
+
+            return File(file.FileContent, "application/pdf", file.FileName);
         }
     }
 }
