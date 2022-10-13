@@ -26,18 +26,17 @@ namespace HealingTalkNearestYou.Controllers
         {
             counsellingManager.cleanPassedCounselling();
             ViewBag.SortByTime = string.IsNullOrEmpty(sort) ? "descending time" : "";
-            ViewBag.SortByStatus = sort == "Status" ? "descending status" : "ascending status";
 
             var counsellings = htny_DB.Counsellings.AsQueryable();
             counsellings = counsellings.Where(c => c.Psychologist.Email == User.Identity.Name && c.CStatus == "Not Booked");
             counsellings = counsellings.Where(c => c.Patient.Name.StartsWith(search) || search == null);
-            if (sort.Equals("descending time"))
+            if (sort == null)
             {
-                counsellings = counsellings.OrderByDescending(c => c.CDateTime);
+                counsellings = counsellings.OrderBy(c => c.CDateTime);
             }
             else
             {
-                counsellings = counsellings.OrderBy(c => c.CDateTime);
+                counsellings = counsellings.OrderByDescending(c => c.CDateTime);
             }
 
             return View(counsellings.ToPagedList(pageNumber ?? 1, 10));
@@ -198,15 +197,17 @@ namespace HealingTalkNearestYou.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UploadFeedback(HttpPostedFileBase postedFile, int cid)
+        public ActionResult UploadFeedback(HttpPostedFileBase postedFile, int cid, Boolean send)
         {
             TryValidateModel(postedFile);
             if (ModelState.IsValid)
             {
+                //save file
                 string fileName = Path.GetFileName(postedFile.FileName);
                 string filePath = Path.Combine(Server.MapPath("~/Uploads/"), fileName);
                 postedFile.SaveAs(filePath);
 
+                //save into database
                 UploadFile file = new UploadFile();
                 Counselling counselling = htny_DB.Counsellings.Find(cid);
                 file.Counselling = counselling;
@@ -214,11 +215,21 @@ namespace HealingTalkNearestYou.Controllers
                 file.FilePath = filePath;
                 Stream str = postedFile.InputStream;
                 BinaryReader Br = new BinaryReader(str);
-                file.FileContent = Br.ReadBytes((Int32)str.Length);
+                Byte[] bytes = Br.ReadBytes((Int32)str.Length);
+                file.FileContent = bytes;
                 counselling.FeedbackFile = file;
                 htny_DB.UploadFiles.Add(file);
                 htny_DB.Entry(counselling).State = EntityState.Modified;
                 htny_DB.SaveChanges();
+
+                //send to patient
+                if (send)
+                {
+                    string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
+                    string content = "Hi, I am your psychologist " + counselling.Psychologist.Name + ".\nHere is the feedback for your counselling.";
+                    EmailSender emailSender = new EmailSender();
+                    emailSender.Send("ygao0096@student.monash.edu", "Your Feedback", content, fileName, base64String);
+                }
 
                 return RedirectToAction("BookedCounselling");
             }

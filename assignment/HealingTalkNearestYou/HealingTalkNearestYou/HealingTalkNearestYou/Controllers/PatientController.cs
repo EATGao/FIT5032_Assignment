@@ -66,7 +66,7 @@ namespace HealingTalkNearestYou.Controllers
             htny_DB.SaveChanges();
 
             //send Email to patient
-            string content = "Hi, You have booked a counselling of at " + counselling.CDateTime + "\n";
+            string content = "Hi, " + patient.Name + ". You have booked a counselling of at " + counselling.CDateTime + "\n";
             EmailSender emailSender = new EmailSender();
             emailSender.Send("ygao0096@student.monash.edu", "Your Booking Result", content);
 
