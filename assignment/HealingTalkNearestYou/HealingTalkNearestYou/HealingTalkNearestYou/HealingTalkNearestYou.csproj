@@ -213,6 +213,10 @@
     <Compile Include="Migrations\202210161338501_first.designer.cs">
       <DependentUpon>202210161338501_first.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202210181204405_second.cs" />
+    <Compile Include="Migrations\202210181204405_second.designer.cs">
+      <DependentUpon>202210181204405_second.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Counselling.cs" />
@@ -304,6 +308,7 @@
     <Content Include="Views\Psychologist\EditBookedCounselling.cshtml" />
     <Content Include="Views\Admin\SendAnnouncement.cshtml" />
     <Content Include="Views\Psychologist\BookedDetails.cshtml" />
+    <Content Include="Views\Admin\CreateUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -325,6 +330,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202210161338501_first.resx">
       <DependentUpon>202210161338501_first.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202210181204405_second.resx">
+      <DependentUpon>202210181204405_second.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -6,10 +6,13 @@ using System.Data.Entity.Validation;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using HealingTalkNearestYou.Models;
 using HealingTalkNearestYou.Util;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 using PagedList;
 using SendGrid.Helpers.Mail;
 
@@ -67,6 +70,27 @@ namespace HealingTalkNearestYou.Controllers
             ApplicationUser user = htny_DB.Users.Find(id);
             ViewBag.dob = user.DOB;
             return View(user);
+        }
+
+        public ActionResult CreateUser()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> CreateUser(string email, string password, string gender, DateTime dOB, string name, string userType)
+        {
+            ApplicationUserManager userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+
+            var user = new ApplicationUser { UserName = email, Email = email, Gender = gender, DOB = dOB, Name = name };
+            var result = await userManager.CreateAsync(user, password);
+
+            if (result.Succeeded)
+            {
+                _ = await userManager.AddToRoleAsync(user.Id, userType);
+            }
+
+            return RedirectToAction("ManageUser");
         }
 
         [HttpPost]

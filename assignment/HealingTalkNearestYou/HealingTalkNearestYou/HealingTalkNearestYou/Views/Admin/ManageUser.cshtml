@@ -9,7 +9,7 @@
 }
 
 <h2>Manage Users</h2>
-
+@Html.ActionLink("Create New User", "CreateUser")
 @using (Html.BeginForm("ManageUser", "Admin", FormMethod.Get))
 {
     @Html.AntiForgeryToken()

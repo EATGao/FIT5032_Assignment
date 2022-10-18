@@ -254,3 +254,4 @@ D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNeares
 D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\obj\Debug\HealingTalkNearestYou.pdb
 D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\obj\Debug\HealingTalkNearestYou.Migrations.first.resources
 D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\obj\Debug\HealingTalkNearestYou.csproj.GenerateResource.cache
+D:\fit5032\FIT5032_Assignment\assignment\HealingTalkNearestYou\HealingTalkNearestYou\HealingTalkNearestYou\obj\Debug\HealingTalkNearestYou.Migrations.second.resources
