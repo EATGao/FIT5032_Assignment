@@ -18,13 +18,13 @@ namespace HealingTalkNearestYou.Controllers
     [Authorize(Roles = "Psychologist")]
     public class PsychologistController : Controller
     {
-        ApplicationDbContext htny_DB = new ApplicationDbContext();
-        CounsellingManager counsellingManager = new CounsellingManager();
+        private ApplicationDbContext htny_DB = new ApplicationDbContext();
+        private CounsellingManager counsellingManager = new CounsellingManager();
 
         // GET: Psychologist
         public ActionResult ManageCounselling(string search, int? pageNumber, string sort)
         {
-            counsellingManager.cleanPassedCounselling();
+            counsellingManager.CleanPassedCounselling();
             ViewBag.SortByTime = string.IsNullOrEmpty(sort) ? "ascending time" : "";
             
             var counsellings = htny_DB.Counsellings.AsQueryable();

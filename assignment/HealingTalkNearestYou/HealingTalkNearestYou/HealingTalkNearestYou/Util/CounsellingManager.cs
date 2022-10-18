@@ -8,9 +8,9 @@ namespace HealingTalkNearestYou.Util
 {
     public class CounsellingManager
     {
-        ApplicationDbContext htny_DB = new ApplicationDbContext();
+        private ApplicationDbContext htny_DB = new ApplicationDbContext();
 
-        public void cleanPassedCounselling()
+        public void CleanPassedCounselling()
         {
             List<Counselling> counsellings = htny_DB.Counsellings.ToList();
 

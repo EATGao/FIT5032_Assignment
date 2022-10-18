@@ -19,7 +19,7 @@ namespace HealingTalkNearestYou.Controllers
     [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
-        ApplicationDbContext htny_DB = new ApplicationDbContext();
+        private ApplicationDbContext htny_DB = new ApplicationDbContext();
         // GET: Admin
         public ActionResult ManageUser(string search, int? pageNumber, string sort)
         {

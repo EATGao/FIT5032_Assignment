@@ -8,9 +8,9 @@ namespace HealingTalkNearestYou.Util
 {
     public class EmailSender
     {
-        private const String API_KEY = "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";
+        private const string API_KEY = "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";
 
-        public void Send(String toEmail, String subject, String contents, string fileName = null, string fileContent = null)
+        public void Send(string toEmail, string subject, string contents, string fileName = null, string fileContent = null)
         {
             var client = new SendGridClient(API_KEY);
             var from = new EmailAddress("gaoyurong923@gmail.com", "HTNY");
@@ -26,7 +26,7 @@ namespace HealingTalkNearestYou.Util
             var response = client.SendEmailAsync(msg);
         }
 
-        public void SendAnnouncementToAll(List<EmailAddress> tos, String subject, String contents, string fileName = null, string fileContent = null)
+        public void SendAnnouncementToAll(List<EmailAddress> tos, string subject, string contents, string fileName = null, string fileContent = null)
         {
             var client = new SendGridClient(API_KEY);
             var from = new EmailAddress("gaoyurong923@gmail.com", "HTNY");

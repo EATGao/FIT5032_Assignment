@@ -11,12 +11,12 @@ namespace HealingTalkNearestYou.Controllers
     [Authorize(Roles = "Patient")]
     public class PatientController : Controller
     {
-        ApplicationDbContext htny_DB = new ApplicationDbContext();
-        CounsellingManager counsellingManager = new CounsellingManager();
+        private ApplicationDbContext htny_DB = new ApplicationDbContext();
+        private CounsellingManager counsellingManager = new CounsellingManager();
         // GET: Patient
         public ActionResult BookCounselling(string search, int? pageNumber, string sort)
         {
-            counsellingManager.cleanPassedCounselling();
+            counsellingManager.CleanPassedCounselling();
             var counsellings = htny_DB.Counsellings.AsQueryable();
             counsellings = counsellings.Where(c => c.CStatus != "Completed");
             ViewBag.SortByTime = string.IsNullOrEmpty(sort) ? "ascending time" : "";
@@ -94,11 +94,6 @@ namespace HealingTalkNearestYou.Controllers
             return RedirectToAction("BookCounselling");
         }
 
-        public ActionResult uploadFiles(int id)
-        {
-            Counselling counselling = htny_DB.Counsellings.Find(id);
-            return View();
-        }
 
         public ActionResult History(string search, int? pageNumber, string sort)
         {
