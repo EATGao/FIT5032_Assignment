@@ -25,11 +25,16 @@ namespace HealingTalkNearestYou.Controllers
         public ActionResult ManageCounselling(string search, int? pageNumber, string sort)
         {
             counsellingManager.cleanPassedCounselling();
-            ViewBag.SortByTime = string.IsNullOrEmpty(sort) ? "descending time" : "";
-
+            ViewBag.SortByTime = string.IsNullOrEmpty(sort) ? "ascending time" : "";
+            
             var counsellings = htny_DB.Counsellings.AsQueryable();
             counsellings = counsellings.Where(c => c.Psychologist.Email == User.Identity.Name && c.CStatus == "Not Booked");
-            counsellings = counsellings.Where(c => c.Patient.Name.StartsWith(search) || search == null);
+            if (search != null) {
+                bool isParsed = Int32.TryParse(search, out int number);
+                if (isParsed) {
+                    counsellings = counsellings.Where(c => c.CId == number);
+                }
+            }
             if (sort == null)
             {
                 counsellings = counsellings.OrderBy(c => c.CDateTime);
@@ -66,8 +71,12 @@ namespace HealingTalkNearestYou.Controllers
                 counselling.CStatus = "Not Booked";
                 var psys = htny_DB.Users.AsQueryable();
                 List<ApplicationUser> psy = psys.Where(p => p.Email == User.Identity.Name).ToList();
-                counselling.Psychologist = psy.FirstOrDefault();
+                ApplicationUser psychologist = psy.FirstOrDefault();
+                counselling.Psychologist = psychologist;
+                psychologist.Counsellings.Add(counselling);
+
                 htny_DB.Counsellings.Add(counselling);
+                htny_DB.Entry(psychologist).State = EntityState.Modified;
                 htny_DB.SaveChanges();
             }
             
@@ -88,7 +97,9 @@ namespace HealingTalkNearestYou.Controllers
         public ActionResult EditUnbookedCounselling(int id, String datetime)
         {
             Counselling counselling = htny_DB.Counsellings.Find(id);
-            counselling.CDateTime = DateTime.Parse(datetime);
+            DateTime date = DateTime.Parse(datetime);
+            counselling.CDateTime = date;
+            counselling.CEndDateTime = date.AddHours(1);
             try
             {
                 htny_DB.Entry(counselling).State = EntityState.Modified;
@@ -136,6 +147,10 @@ namespace HealingTalkNearestYou.Controllers
             }
             else
             {
+                List<ApplicationUser> result = htny_DB.Users.Where(p => p.Email == User.Identity.Name).ToList();
+                ApplicationUser psyschologist = result.FirstOrDefault();
+                psyschologist.Counsellings.Remove(counselling);
+                htny_DB.Entry(psyschologist).State = EntityState.Modified;
                 htny_DB.Counsellings.Remove(counselling);
                 htny_DB.SaveChanges();
             }
@@ -158,10 +173,21 @@ namespace HealingTalkNearestYou.Controllers
             return View(counselling);
         }
 
+        public ActionResult BookedDetails(int id)
+        {
+            Counselling counselling = htny_DB.Counsellings.Find(id);
+
+            ViewBag.psyName = counselling.Psychologist.Name;
+            ViewBag.patientName = counselling.Patient.Name;
+
+            return View(counselling);
+        }
+
         public ActionResult BookedCounselling(string search, int? pageNumber, string sort)
         {
             ViewBag.SortByTime = string.IsNullOrEmpty(sort) ? "descending time" : "";
-            ViewBag.SortByStatus = sort == "Status" ? "descending status" : "ascending status";
+            ViewBag.SortByStatus = sort == "descending status" ? "ascending status" : "descending status";
+            ViewBag.SortByPatientName = sort == "descending name" ? "ascending name" : "descending name";
 
             var counsellings = htny_DB.Counsellings.AsQueryable();
             counsellings = counsellings.Where(c => c.Psychologist.Email == User.Identity.Name);
@@ -178,6 +204,12 @@ namespace HealingTalkNearestYou.Controllers
                     break;
                 case "ascending status":
                     counsellings = counsellings.OrderBy(c => c.CStatus);
+                    break;
+                case "descending name":
+                    counsellings = counsellings.OrderByDescending(c => c.Patient.Name);
+                    break;
+                case "ascending name":
+                    counsellings = counsellings.OrderBy(c => c.Patient.Name);
                     break;
                 default:
                     counsellings = counsellings.OrderBy(c => c.CDateTime);
@@ -197,7 +229,7 @@ namespace HealingTalkNearestYou.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UploadFeedback(HttpPostedFileBase postedFile, int cid, Boolean send)
+        public ActionResult UploadFeedback(HttpPostedFileBase postedFile, int cid, Boolean send = false)
         {
             TryValidateModel(postedFile);
             if (ModelState.IsValid)
@@ -228,7 +260,7 @@ namespace HealingTalkNearestYou.Controllers
                     string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
                     string content = "Hi, I am your psychologist " + counselling.Psychologist.Name + ".\nHere is the feedback for your counselling.";
                     EmailSender emailSender = new EmailSender();
-                    emailSender.Send("ygao0096@student.monash.edu", "Your Feedback", content, fileName, base64String);
+                    emailSender.Send(counselling.Patient.Email, "Your Counselling Feedback", content, fileName, base64String);
                 }
 
                 return RedirectToAction("BookedCounselling");

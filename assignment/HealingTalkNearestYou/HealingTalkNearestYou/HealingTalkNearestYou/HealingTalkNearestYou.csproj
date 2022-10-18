@@ -209,33 +209,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202210111248388_first.cs" />
-    <Compile Include="Migrations\202210111248388_first.designer.cs">
-      <DependentUpon>202210111248388_first.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202210111355545_second.cs" />
-    <Compile Include="Migrations\202210111355545_second.designer.cs">
-      <DependentUpon>202210111355545_second.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202210111433062_third.cs" />
-    <Compile Include="Migrations\202210111433062_third.designer.cs">
-      <DependentUpon>202210111433062_third.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202210120217523_addEndDateTime.cs" />
-    <Compile Include="Migrations\202210120217523_addEndDateTime.designer.cs">
-      <DependentUpon>202210120217523_addEndDateTime.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202210130312591_addFileEntity.cs" />
-    <Compile Include="Migrations\202210130312591_addFileEntity.designer.cs">
-      <DependentUpon>202210130312591_addFileEntity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202210130321246_changeEntityName.cs" />
-    <Compile Include="Migrations\202210130321246_changeEntityName.designer.cs">
-      <DependentUpon>202210130321246_changeEntityName.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202210130833383_addFileContent.cs" />
-    <Compile Include="Migrations\202210130833383_addFileContent.designer.cs">
-      <DependentUpon>202210130833383_addFileContent.cs</DependentUpon>
+    <Compile Include="Migrations\202210161338501_first.cs" />
+    <Compile Include="Migrations\202210161338501_first.designer.cs">
+      <DependentUpon>202210161338501_first.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -253,6 +229,7 @@
     <Content Include="App_Data\aspnet-HealingTalkNearestYou-20221005082333_log.ldf">
       <DependentUpon>aspnet-HealingTalkNearestYou-20221005082333.mdf</DependentUpon>
     </Content>
+    <Content Include="Content\backgroundStyle.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -330,6 +307,7 @@
     <Content Include="Views\Psychologist\BookedCounselling.cshtml" />
     <Content Include="Views\Psychologist\EditBookedCounselling.cshtml" />
     <Content Include="Views\Admin\SendAnnouncement.cshtml" />
+    <Content Include="Views\Psychologist\BookedDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -345,31 +323,13 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202210111248388_first.resx">
-      <DependentUpon>202210111248388_first.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202210111355545_second.resx">
-      <DependentUpon>202210111355545_second.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202210111433062_third.resx">
-      <DependentUpon>202210111433062_third.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202210120217523_addEndDateTime.resx">
-      <DependentUpon>202210120217523_addEndDateTime.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202210130312591_addFileEntity.resx">
-      <DependentUpon>202210130312591_addFileEntity.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202210130321246_changeEntityName.resx">
-      <DependentUpon>202210130321246_changeEntityName.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202210130833383_addFileContent.resx">
-      <DependentUpon>202210130833383_addFileContent.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Uploads\" />
     <Folder Include="Views\UploadFile\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202210161338501_first.resx">
+      <DependentUpon>202210161338501_first.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using PagedList;
 using HealingTalkNearestYou.Util;
-
+using System.Data.Entity;
 
 namespace HealingTalkNearestYou.Controllers
 {
@@ -61,14 +61,35 @@ namespace HealingTalkNearestYou.Controllers
             // change counselling status and patient
             counselling.Patient = patient;
             counselling.CStatus = "Booked";
+            patient.Counsellings.Add(counselling);
             // save changes in database
-            htny_DB.Entry<Counselling>(counselling).State = System.Data.Entity.EntityState.Modified;
+            htny_DB.Entry(counselling).State = EntityState.Modified;
+            htny_DB.Entry(patient).State = EntityState.Modified;
             htny_DB.SaveChanges();
 
             //send Email to patient
             string content = "Hi, " + patient.Name + ". You have booked a counselling of at " + counselling.CDateTime + "\n";
             EmailSender emailSender = new EmailSender();
-            emailSender.Send("ygao0096@student.monash.edu", "Your Booking Result", content);
+            emailSender.Send(patient.Email, "Your Booking Result", content);
+
+            return RedirectToAction("History");
+        }
+
+        public ActionResult CancelBooking(int id)
+        {
+            // get counselling
+            Counselling counselling = htny_DB.Counsellings.Find(id);
+
+            // change counselling status and patient
+            counselling.Patient = null;
+            counselling.CStatus = "Not Booked";
+            List<ApplicationUser> result = htny_DB.Users.Where(p => p.Email == User.Identity.Name).ToList();
+            ApplicationUser patient = result.FirstOrDefault();
+            patient.Counsellings.Remove(counselling);
+            // save changes in database
+            htny_DB.Entry(counselling).State = EntityState.Modified;
+            htny_DB.Entry(patient).State = EntityState.Modified;
+            htny_DB.SaveChanges();
 
             return RedirectToAction("BookCounselling");
         }

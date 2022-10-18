@@ -19,6 +19,7 @@ namespace HealingTalkNearestYou.Models
         public string Name { get; set; }
 
         [Required]
+        [DataType(DataType.Date)]
         public DateTime DOB { get; set; }
 
         public string Description { get; set; }

@@ -11,7 +11,8 @@
 <h2>BookCounselling</h2>
 @using (Html.BeginForm("BookCounselling", "Patient", FormMethod.Get))
 {
-    @Html.TextBox("search")
+    @Html.AntiForgeryToken()
+    @Html.TextBox("search", "", new { placeholder = "Enter Psychologist Name" })
     <input type="submit" name="submit" value="Search" />
 }
 <table class="table">
@@ -39,27 +40,27 @@
     {
         foreach (var item in Model)
         {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CDateTime, "MyDateTime")
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CStatus)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Psychologist.Name)
-                    </td>
-                    <td>
-                        @if (item.CStatus.Equals("Not Booked"))
-                        {
-                            @Html.ActionLink("Book", "Book", new { id = item.CId })
-                        }
-                        else
-                        {
-                            <text>Booked</text>
-                        }
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CDateTime, "MyDateTime")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Psychologist.Name)
+                </td>
+                <td>
+                    @if (item.CStatus.Equals("Not Booked"))
+                    {
+                        @Html.ActionLink("Book", "Book", new { id = item.CId })
+                    }
+                    else
+                    {
+                        <text>Booked</text>
+                    }
+                </td>
+            </tr>
         }
     }
 

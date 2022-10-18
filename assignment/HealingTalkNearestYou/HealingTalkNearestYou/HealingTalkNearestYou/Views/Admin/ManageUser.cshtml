@@ -9,28 +9,28 @@
 }
 
 <h2>Manage Users</h2>
-@Html.ActionLink("Send Announcement", "SendAnnouncement")
 
 @using (Html.BeginForm("ManageUser", "Admin", FormMethod.Get))
 {
     @Html.AntiForgeryToken()
     <b> Search For: </b>
-    @Html.TextBox("search")
+    @Html.TextBox("search","", new { @placeholder = "Enter User Name/Email" })
     <input type="submit" name="submit" value="Search" />
 }
+<div style="font:bold;color:red">For users who have booked/created counsellings, you cannot delete them.</div>
 <table class="table">
     <tr>
         <th>
-            Email
+            @Html.ActionLink("Email", "ManageUser", new { sort = ViewBag.SortByEmail, search = Request.QueryString["search"] })
         </th>
         <th>
             @Html.ActionLink("Name", "ManageUser", new { sort = ViewBag.SortByName, search = Request.QueryString["search"] })
         </th>
         <th>
-            @Html.ActionLink("Gender", "ManageUser", new { sort = ViewBag.SortByGender, search = Request.QueryString["search"] })
+            Gender
         </th>
         <th>
-            @Html.ActionLink("Date of Birth", "ManageUser", new { sort = ViewBag.SortByDOB, search = Request.QueryString["search"] })
+            Date of Birth
         </th>
         <th>
             Operation
@@ -57,13 +57,23 @@
                     @Html.DisplayFor(modelItem => item.Gender)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DOB, "MyDate")
+                    @Html.DisplayFor(modelItem => item.DOB,"MyDate")
                 </td>
-                <td>
-                    @Html.ActionLink("Edit", "EditUser", new { id = item.Id }) |
-                    @Html.ActionLink("Detail", "DetailUser", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "DeleteUser", new { id = item.Id })
-                </td>
+                @if (item.Counsellings.Count == 0)
+                {
+                    <td>
+                        @Html.ActionLink("Edit", "EditUser", new { id = item.Id }) |
+                        @Html.ActionLink("Detail", "DetailUser", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                }
+                else
+                { 
+                    <td>
+                        @Html.ActionLink("Edit", "EditUser", new { id = item.Id }) |
+                        @Html.ActionLink("Detail", "DetailUser", new { id = item.Id })
+                    </td>
+                }
             </tr>
         }
     }

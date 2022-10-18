@@ -20,7 +20,7 @@
 
 @using (Html.BeginForm("CreateCounselling", "Psychologist", FormMethod.Post, new { onsubmit = "return VerifiedDate()" }))
 {
-
+    @Html.AntiForgeryToken()
     <p>Couselling Date Time:</p>
     <div class="container" style="margin:80px">
         <div style="position: relative">

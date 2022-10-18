@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using HealingTalkNearestYou.Models;
@@ -22,43 +23,39 @@ namespace HealingTalkNearestYou.Controllers
         // GET: Admin
         public ActionResult ManageUser(string search, int? pageNumber, string sort)
         {
+            ViewBag.SortByEmail = string.IsNullOrEmpty(sort) ? "descending email" : "";
+            ViewBag.SortByName = sort == "descending name" ? "ascending name" : "descending name";
 
-            ViewBag.SortByName = string.IsNullOrEmpty(sort) ? "" : "descending name";
-            ViewBag.SortByGender = sort == "Gender" ? "descending gender" : "ascending gender";
-            ViewBag.SortByDOB = sort == "Date of Birth" ? "descending dob" : "ascending dob";
             var users = htny_DB.Users.AsQueryable();
 
-
-            users = users.Where(p => p.Name.StartsWith(search) || search == null);
+            users = users.Where(x => x.UserName != User.Identity.Name);
+            if (search != null && Regex.IsMatch(search, "[A-Za-z0-9][@][A-Za-z0-9]+[.][A-Za-z0-9]"))
+            {
+                users = users.Where(x => x.Email.StartsWith(search) || search == null);
+            }
+            else 
+            {
+                users = users.Where(x => x.Name.StartsWith(search) || search == null);
+            }
 
 
             switch (sort)
             {
-
+                case "ascending name":
+                    users = users.OrderBy(x => x.Name);
+                    break;
                 case "descending name":
-                    users = users.OrderByDescending(p => p.Name);
+                    users = users.OrderByDescending(x => x.Name);
                     break;
-
-                case "ascending dob":
-                    users = users.OrderBy(p => p.DOB);
+                case "descending email":
+                    users = users.OrderByDescending(x => x.Email);
                     break;
-
-                case "descending gender":
-                    users = users.OrderByDescending(p => p.Gender);
+                case "ascending email":
+                    users = users.OrderBy(x => x.Email);
                     break;
-
-                case "ascending gender":
-                    users = users.OrderBy(p => p.Gender);
-                    break;
-                case "descending dob":
-                    users = users.OrderByDescending(p => p.DOB);
-                    break;
-
                 default:
-                    users = users.OrderBy(p => p.Name);
+                    users = users.OrderBy(x => x.Email);
                     break;
-
-
             }
 
 
@@ -68,7 +65,7 @@ namespace HealingTalkNearestYou.Controllers
         public ActionResult EditUser(string id)
         {
             ApplicationUser user = htny_DB.Users.Find(id);
-
+            ViewBag.dob = user.DOB;
             return View(user);
         }
 
@@ -93,7 +90,7 @@ namespace HealingTalkNearestYou.Controllers
             return View(user);
         }
 
-        public ActionResult DeleteUser(string id)
+        public ActionResult Delete(string id)
         {
             ApplicationUser user = htny_DB.Users.Find(id);
             if (user == null)
@@ -102,8 +99,11 @@ namespace HealingTalkNearestYou.Controllers
             }
             else
             {
-                htny_DB.Users.Remove(user);
-                htny_DB.SaveChanges();
+                if (user.Counsellings.Count == 0)
+                {
+                    htny_DB.Users.Remove(user);
+                    htny_DB.SaveChanges();
+                }
             }
             return RedirectToAction("ManageUser");
         }
@@ -130,7 +130,12 @@ namespace HealingTalkNearestYou.Controllers
                     string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
 
                     // get all patient and psychologist email here
-                    tos.Add(new EmailAddress("ygao0096@student.monash.edu", ""));
+                    List<ApplicationUser> users = htny_DB.Users.ToList();
+                    foreach (ApplicationUser u in users)
+                    {
+                        tos.Add(new EmailAddress(u.Email, ""));
+                    }
+
                     emailSender.SendAnnouncementToAll(tos, "HTNY Announcement", content,
                         Path.GetFileName(postedFile.FileName), base64String);
                 }

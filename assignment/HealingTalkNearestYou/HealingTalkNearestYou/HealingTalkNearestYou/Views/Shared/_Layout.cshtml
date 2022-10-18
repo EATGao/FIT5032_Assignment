@@ -7,13 +7,14 @@
     <title>@ViewBag.Title - HealingTalkNearestYou</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
-
+    <link href="~/Content/backgroundStyle.css" rel="stylesheet" />
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -27,45 +28,35 @@
                 @Html.ActionLink("HealingTalkNearestYou", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                @if (!User.Identity.IsAuthenticated)
+
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+
+                @if (User.Identity.IsAuthenticated && User.IsInRole("Patient"))
                 {
                     <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+
+                        <li>@Html.ActionLink("Book Counselling", "BookCounselling", "Patient")</li>
+                        <li>@Html.ActionLink("Counselling History", "History", "Patient")</li>
                     </ul>
                 }
-                else
+                else if (User.Identity.IsAuthenticated && User.IsInRole("Psychologist"))
                 {
-                    if (User.IsInRole("Patient"))
-                    {
-                        <ul class="nav navbar-nav">
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                            <li>@Html.ActionLink("Book Counselling", "BookCounselling", "Patient")</li>
-                            <li>@Html.ActionLink("Counselling History", "History", "Patient")</li>
-                        </ul>
-                    }
-                    else if (User.IsInRole("Psychologist"))
-                    {
-                        <ul class="nav navbar-nav">
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                            <li>@Html.ActionLink("My Counselling", "ManageCounselling", "Psychologist")</li>
-                        </ul>
-                    }
-                    else
-                    {
-                        <ul class="nav navbar-nav">
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                            <li>@Html.ActionLink("Users", "ManageUser", "Admin")</li>
-                        </ul>
-                    }
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("My Counselling", "ManageCounselling", "Psychologist")</li>
+                    </ul>
                 }
+                else if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Users", "ManageUser", "Admin")</li>
+                        <li>@Html.ActionLink("Send Announcement", "SendAnnouncement", "Admin")</li>
+                    </ul>
+                }
+                
                 @Html.Partial("_LoginPartial")
             </div>
         </div>

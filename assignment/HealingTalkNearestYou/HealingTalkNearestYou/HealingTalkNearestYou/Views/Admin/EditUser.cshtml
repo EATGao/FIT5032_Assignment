@@ -14,6 +14,7 @@
 
 <div class="form-horizontal">
     <h4>Users</h4>
+    
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.Id)
@@ -31,7 +32,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @required = "true"} })
             @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -39,7 +40,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @required = "true" } })
             @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -47,7 +48,8 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Gender, new { htmlAttributes = new { @class = "form-control" } })
+            <span>Female </span>@Html.RadioButtonFor(m => m.Gender, "Female", new { @id = "UserType1", @name = "UserType" })
+            <span> | Male </span>@Html.RadioButtonFor(m => m.Gender, "Male", new { @id = "UserType2", @name = "UserType" })
             @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -55,7 +57,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.DOB, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.DOB, "date")
+            @Html.EditorFor(model => model.DOB, new { @id = "DOB" })
             @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -74,6 +76,20 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    const date = formatDate(new Date()).split(' ');
+
+
+    const dateDOB = document.getElementById('DOB');
+    dateDOB.max = date;
+    dateDOB.value = date;
+
+    function formatDate(date) {
+        return [date.getFullYear(),
+        (date.getMonth() + 1).toString().padStart(2, '0'),
+        (date.getDate()).toString().padStart(2, '0')].join('-');
+    }
+</script>
 }
 
 <div>
