@@ -60,8 +60,8 @@ namespace HealingTalkNearestYou
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
-                ClientId = "1013911326144-9mo96tmnj1gf0bu7ieastmbm0pd490uk.apps.googleusercontent.com",
-                ClientSecret = "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"
+                ClientId = "3522719493-lugd391qoeap0he9peu6gjj1k7unqh6u.apps.googleusercontent.com",
+                ClientSecret = "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"
             });
         }
     }

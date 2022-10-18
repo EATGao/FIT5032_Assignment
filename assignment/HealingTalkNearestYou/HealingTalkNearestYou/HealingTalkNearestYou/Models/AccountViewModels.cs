@@ -9,6 +9,23 @@ namespace HealingTalkNearestYou.Models
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Name")]
+        public string Name { get; set; }
+
+
+        [Required]
+        [Display(Name = "Gender")]
+        public string Gender { get; set; }
+
+        [Required]
+        [Display(Name = "Date of birth")]
+        public DateTime DOB { get; set; }
+
+        [Required]
+        [Display(Name = "I am a ")]
+        public string UserType { get; set; }
     }
 
     public class ExternalLoginListViewModel
@@ -27,6 +44,8 @@ namespace HealingTalkNearestYou.Models
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
+
+        public bool RememberMe { get; set; }
     }
 
     public class RegisterViewModel

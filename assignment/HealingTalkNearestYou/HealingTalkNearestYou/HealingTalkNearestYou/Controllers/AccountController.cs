@@ -253,9 +253,11 @@ namespace HealingTalkNearestYou.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Gender = model.Gender, DOB = model.DOB, Name = model.Name };
                 var result = await UserManager.CreateAsync(user);
-                if (result.Succeeded)
+
+                var addRoleResult = await UserManager.AddToRoleAsync(user.Id, model.UserType);
+                if (result.Succeeded && addRoleResult.Succeeded)
                 {
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
