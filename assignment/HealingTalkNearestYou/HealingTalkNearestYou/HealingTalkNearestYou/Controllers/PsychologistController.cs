@@ -63,25 +63,35 @@ namespace HealingTalkNearestYou.Controllers
         {
             if (ModelState.IsValid)
             {
+                // parse string to time
                 CultureInfo culture = CultureInfo.CurrentCulture;
                 DateTime cDateTime = DateTime.Parse(dateTime, culture);
-                Counselling counselling = new Counselling();
-                counselling.CDateTime = cDateTime;
-                counselling.CEndDateTime = cDateTime.AddHours(1);
-                counselling.CStatus = "Not Booked";
-                var psys = htny_DB.Users.AsQueryable();
-                List<ApplicationUser> psy = psys.Where(p => p.Email == User.Identity.Name).ToList();
-                ApplicationUser psychologist = psy.FirstOrDefault();
-                counselling.Psychologist = psychologist;
-                psychologist.Counsellings.Add(counselling);
 
-                htny_DB.Counsellings.Add(counselling);
-                htny_DB.Entry(psychologist).State = EntityState.Modified;
-                htny_DB.SaveChanges();
+                Counselling notAvailable = counsellingManager.CheckAvailable(cDateTime, User.Identity.Name, "Psychologist");
+                if (notAvailable == null)
+                {
+                    Counselling counselling = new Counselling
+                    {
+                        CDateTime = cDateTime,
+                        CEndDateTime = cDateTime.AddHours(1),
+                        CStatus = "Not Booked"
+                    };
+                    var psys = htny_DB.Users.AsQueryable();
+                    List<ApplicationUser> psy = psys.Where(p => p.Email == User.Identity.Name).ToList();
+                    ApplicationUser psychologist = psy.FirstOrDefault();
+                    counselling.Psychologist = psychologist;
+                    psychologist.Counsellings.Add(counselling);
+
+                    htny_DB.Counsellings.Add(counselling);
+                    htny_DB.Entry(psychologist).State = EntityState.Modified;
+                    htny_DB.SaveChanges();
+
+                    return RedirectToAction("ManageCounselling");
+                }
+                ViewBag.errorMsg = "Create fail. \nYou have a counselling from " + notAvailable.CDateTime + " to " + notAvailable.CEndDateTime
+                    + ". \nPlease choose another time.";
             }
-            
-            return RedirectToAction("ManageCounselling");
-
+            return View();
         }
 
         public ActionResult EditUnbookedCounselling(int id)

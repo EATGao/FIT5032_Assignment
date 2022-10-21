@@ -309,6 +309,7 @@
     <Content Include="Views\Admin\SendAnnouncement.cshtml" />
     <Content Include="Views\Psychologist\BookedDetails.cshtml" />
     <Content Include="Views\Admin\CreateUser.cshtml" />
+    <Content Include="Views\Patient\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

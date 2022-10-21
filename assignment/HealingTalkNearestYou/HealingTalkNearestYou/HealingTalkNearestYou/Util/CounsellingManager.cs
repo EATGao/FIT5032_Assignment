@@ -23,5 +23,28 @@ namespace HealingTalkNearestYou.Util
                 }
             }
         }
+
+        public Counselling CheckAvailable(DateTime datetime, string userName, string userType)
+        {
+            var counsellings = htny_DB.Counsellings.AsQueryable();
+            if (userType == "Psychologist")
+            {
+                counsellings = counsellings.Where(c => c.Psychologist.Email == userName);
+            }
+            else if (userType == "Patient")
+            {
+                counsellings = counsellings.Where(c => c.Patient.Email == userName && c.CStatus == "Booked");
+            }
+
+            foreach (Counselling c in counsellings)
+            {
+                if (datetime >= c.CDateTime && datetime < c.CEndDateTime)
+                {
+                    return c;
+                }
+            }
+
+            return null;
+        }
     }
 }

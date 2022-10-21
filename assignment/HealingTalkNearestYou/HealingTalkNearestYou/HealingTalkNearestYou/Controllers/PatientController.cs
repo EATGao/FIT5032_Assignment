@@ -5,6 +5,9 @@ using System.Web.Mvc;
 using PagedList;
 using HealingTalkNearestYou.Util;
 using System.Data.Entity;
+using System;
+using System.Web.Security;
+using Microsoft.AspNet.Identity;
 
 namespace HealingTalkNearestYou.Controllers
 {
@@ -13,22 +16,23 @@ namespace HealingTalkNearestYou.Controllers
     {
         private ApplicationDbContext htny_DB = new ApplicationDbContext();
         private CounsellingManager counsellingManager = new CounsellingManager();
+      
+        
         // GET: Patient
         public ActionResult BookCounselling(string search, int? pageNumber, string sort)
         {
             counsellingManager.CleanPassedCounselling();
             var counsellings = htny_DB.Counsellings.AsQueryable();
             counsellings = counsellings.Where(c => c.CStatus != "Completed");
-            ViewBag.SortByTime = string.IsNullOrEmpty(sort) ? "ascending time" : "";
-            ViewBag.SortByPsyName = sort == "Psychologist Name" ? "descending name" : "ascending name";
-            ViewBag.SortByStatus = sort == "Status" ? "descending status" : "ascending status";
+            ViewBag.SortByTime = string.IsNullOrEmpty(sort) ? "descending time" : "";
+            ViewBag.SortByPsyName = sort == "ascending name" ? "descending name" : "ascending name";
 
             counsellings = counsellings.Where(c => c.Psychologist.Name.StartsWith(search) || search == null);
 
             switch (sort)
             {
-                case "ascending time":
-                    counsellings = counsellings.OrderBy(c => c.CDateTime);
+                case "descending time":
+                    counsellings = counsellings.OrderByDescending(c => c.CDateTime);
                     break;
                 case "ascending name":
                     counsellings = counsellings.OrderBy(c => c.Psychologist.Name);
@@ -43,7 +47,7 @@ namespace HealingTalkNearestYou.Controllers
                     counsellings = counsellings.OrderBy(c => c.CStatus);
                     break;
                 default:
-                    counsellings = counsellings.OrderByDescending(c => c.CDateTime);
+                    counsellings = counsellings.OrderBy(c => c.CDateTime);
                     break;
             }
 
@@ -51,28 +55,38 @@ namespace HealingTalkNearestYou.Controllers
             return View(counsellings.ToPagedList(pageNumber ?? 1, 10));
         }
 
-        public ActionResult Book(int id)
+        [HttpPost]
+        public ActionResult BookCounselling(int id)
         {
             // get counselling
             Counselling counselling = htny_DB.Counsellings.Find(id);
-            // get patient user
-            List<ApplicationUser> result = htny_DB.Users.Where(p => p.Email == User.Identity.Name).ToList();
-            ApplicationUser patient = result.FirstOrDefault();
-            // change counselling status and patient
-            counselling.Patient = patient;
-            counselling.CStatus = "Booked";
-            patient.Counsellings.Add(counselling);
-            // save changes in database
-            htny_DB.Entry(counselling).State = EntityState.Modified;
-            htny_DB.Entry(patient).State = EntityState.Modified;
-            htny_DB.SaveChanges();
+            Counselling notAvailable = counsellingManager.CheckAvailable(counselling.CDateTime, User.Identity.Name, "Patient");
+            if (notAvailable == null)
+            {
+                // get patient user
+                List<ApplicationUser> result = htny_DB.Users.Where(p => p.Email == User.Identity.Name).ToList();
+                ApplicationUser patient = result.FirstOrDefault();
+                // change counselling status and patient
+                counselling.Patient = patient;
+                counselling.CStatus = "Booked";
+                patient.Counsellings.Add(counselling);
+                // save changes in database
+                htny_DB.Entry(counselling).State = EntityState.Modified;
+                htny_DB.Entry(patient).State = EntityState.Modified;
+                htny_DB.SaveChanges();
 
-            //send Email to patient
-            string content = "Hi, " + patient.Name + ". You have booked a counselling of at " + counselling.CDateTime + "\n";
-            EmailSender emailSender = new EmailSender();
-            emailSender.Send(patient.Email, "Your Booking Result", content);
+                //send Email to patient
+                string content = "Hi, " + patient.Name + ". You have booked a counselling of at " + counselling.CDateTime + "\n";
+                EmailSender emailSender = new EmailSender();
+                emailSender.Send(patient.Email, "Your Booking Result", content);
 
-            return RedirectToAction("History");
+                return Content("Successful!");
+            }
+            else
+            { 
+                return Content("Book fail. \nYou already have a counselling from " + notAvailable.CDateTime + " to " + notAvailable.CEndDateTime
+                    + ". \nPlease choose another time.");
+            }
         }
 
         public ActionResult CancelBooking(int id)

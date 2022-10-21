@@ -61,7 +61,7 @@
             <div class="col-md-10">
                 <span>Patient </span>@Html.RadioButtonFor(m => m.UserType, "Patient", new { @id = "UserType1", @name = "UserType", @checked = true })
                 <span> | Psychologist </span>@Html.RadioButtonFor(m => m.UserType, "Psychologist", new { @id = "UserType2", @name = "UserType" })
-                <span> | Admin </span>@Html.RadioButtonFor(m => m.UserType, "Admin", new { @id = "UserType2", @name = "UserType" })
+                @* <span> | Admin </span>@Html.RadioButtonFor(m => m.UserType, "Admin", new { @id = "UserType2", @name = "UserType" })*@
 
             </div>
         </div>
