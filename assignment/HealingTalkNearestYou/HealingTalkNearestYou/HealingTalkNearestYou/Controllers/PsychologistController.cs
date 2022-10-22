@@ -108,18 +108,25 @@ namespace HealingTalkNearestYou.Controllers
         {
             Counselling counselling = htny_DB.Counsellings.Find(id);
             DateTime date = DateTime.Parse(datetime);
-            counselling.CDateTime = date;
-            counselling.CEndDateTime = date.AddHours(1);
-            try
+            Counselling notAvailable = counsellingManager.CheckAvailable(date, User.Identity.Name, "Psychologist");
+            if (notAvailable == null)
             {
-                htny_DB.Entry(counselling).State = EntityState.Modified;
-                htny_DB.SaveChanges();
+                counselling.CDateTime = date;
+                counselling.CEndDateTime = date.AddHours(1);
+                try
+                {
+                    htny_DB.Entry(counselling).State = EntityState.Modified;
+                    htny_DB.SaveChanges();
+                }
+                catch (DbEntityValidationException dbEx)
+                {
+                    Console.Write(dbEx);
+                }
+                return RedirectToAction("ManageCounselling");
             }
-            catch (DbEntityValidationException dbEx)
-            {
-                Console.Write(dbEx);
-            }
-            return RedirectToAction("ManageCounselling");
+            ViewBag.errorMsg = "Edit fail. \nYou have a counselling from " + notAvailable.CDateTime + " to " + notAvailable.CEndDateTime
+                    + ". \nPlease choose another time.";
+            return View();
         }
 
         public ActionResult EditBookedCounselling(int id)

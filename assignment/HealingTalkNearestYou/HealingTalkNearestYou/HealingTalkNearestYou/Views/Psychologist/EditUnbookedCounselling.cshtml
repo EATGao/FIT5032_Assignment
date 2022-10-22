@@ -6,6 +6,7 @@
 }
 
 <h2>Edit</h2>
+<div style="color:red">@ViewBag.errorMsg</div>
 <script type="text/javascript">
     function VerifiedDate() {
         var userInput = $("#datetime").data("DateTimePicker").date().toISOString();
@@ -42,10 +43,12 @@
 </div>
 
 <script>
+
     $('#datetime').datetimepicker({
         format: 'YYYY/MM/DD HH:mm',
-        stepping: 5,
-        minDate: new Date()
+        stepping: 60,
+        minDate: new Date(),
+        maxDate: new Date().setDate(new Date().getDate() + 7),
     });
 </script>
 }

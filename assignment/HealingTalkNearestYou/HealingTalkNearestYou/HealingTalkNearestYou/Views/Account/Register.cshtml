@@ -57,12 +57,8 @@
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.UserType, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                <span>Patient </span>@Html.RadioButtonFor(m => m.UserType, "Patient", new { @id = "UserType1", @name = "UserType", @checked = true })
-                <span> | Psychologist </span>@Html.RadioButtonFor(m => m.UserType, "Psychologist", new { @id = "UserType2", @name = "UserType" })
-                @* <span> | Admin </span>@Html.RadioButtonFor(m => m.UserType, "Admin", new { @id = "UserType2", @name = "UserType" })*@
-
+            <input id="UserType" name="UserType" type="hidden" value="Patient">
             </div>
         </div>
 

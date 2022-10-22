@@ -34,7 +34,8 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CDateTime)
+                    @Html.DisplayFor(modelItem => item.CDateTime, "MyDateTime") -
+                    @Html.DisplayFor(modelItem => item.CEndDateTime, "MyDateTime")
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.CStatus)

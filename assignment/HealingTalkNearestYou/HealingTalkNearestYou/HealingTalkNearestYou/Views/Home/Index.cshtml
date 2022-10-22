@@ -3,6 +3,12 @@
 }
 
 <link href="~/Content/indexStyle.css" rel="stylesheet" />
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
+<script src=https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.2/mapbox-gl-directions.js></script>
+<link rel="stylesheet" href=https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.2/mapbox-gl-directions.css type="text/css" />
 
 
 <div class="headpart">
@@ -11,7 +17,7 @@
 </div>
 
 <hr class="indexUp">
-<br>
+
 <h2 align="center">Are you struggle with...</h2>
 <br>
 
@@ -36,11 +42,11 @@
     </div>
 </div>
 
-
-<br><br>
+<hr class="indexUp">
+<br>
 
 <h2 align="center">We are waiting for help you in Melbourne</h2>
-
+<br>
 <div class="container">
     <div id='map'></div>
 </div>
@@ -67,9 +73,7 @@
             positionOptions: {
                 enableHighAccuracy: true
             },
-            // When active the map will receive updates to the device's location as it changes.
             trackUserLocation: true,
-            // Draw an arrow next to the location dot to indicate which direction the device is heading.
             showUserHeading: true
         })
     );

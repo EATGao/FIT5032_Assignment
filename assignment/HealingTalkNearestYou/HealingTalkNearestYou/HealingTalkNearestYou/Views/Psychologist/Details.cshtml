@@ -27,7 +27,7 @@
         <dd>
             @for (int i = 0; i < Model.CRate; i++)
             {
-                <span class="glyphicon glyphicon-star" style="color:yellow"></span>
+                <span class="glyphicon glyphicon-star" style="color:orange;"></span>
             }
             @if (Model.CRate != null)
             {
@@ -78,5 +78,5 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "EditBookedCounselling", new { id = Model.CId }) |
-    @Html.ActionLink("Back to List", "BookedCounselling")
+    @Html.ActionLink("Back to List", "ManageCounselling")
 </p>

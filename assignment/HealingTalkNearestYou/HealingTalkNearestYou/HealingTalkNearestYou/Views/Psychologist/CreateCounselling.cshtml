@@ -21,8 +21,9 @@
 @using (Html.BeginForm("CreateCounselling", "Psychologist", FormMethod.Post, new { onsubmit = "return VerifiedDate()" }))
 {
     @Html.AntiForgeryToken()
-    <p>Couselling Date Time:</p>
+    <p>You could set your couselling start date and time for next 7 days. One counselling is last for 1 hour. Have a nice day!</p>
     <div class="container" style="margin:80px">
+        <p>Date Time:</p>
         <div style="position: relative">
             <input class="form-control" data-format="yyyy-MM-dd hh:mm" type="text" id="datetime" />
         </div>
@@ -40,8 +41,6 @@
             stepping: 60,
             minDate: new Date(),
             maxDate: new Date().setDate(new Date().getDate() + 7),
-            minTime: '08:00:00',
-            maxTime: '17:00:00'
         });
     </script>
 

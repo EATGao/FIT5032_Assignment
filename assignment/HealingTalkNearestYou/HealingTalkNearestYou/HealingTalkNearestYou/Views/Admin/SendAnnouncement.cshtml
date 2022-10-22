@@ -23,7 +23,7 @@
         @Html.AntiForgeryToken()
         <div class="form-group">
             <div class="col-md-10">
-                <textarea class="form-control" id="inputContent"></textarea>
+                <textarea class="form-control" id="inputContent" placeholder="Enter content here..."></textarea>
                 <input type="hidden" name="content" id="content" value="" />
             </div>
         </div>
@@ -31,7 +31,7 @@
             #inputContent {
                 resize: none;
                 height: 120px;
-                width: 600px;
+                width: 100%;
             }
         </style>
 

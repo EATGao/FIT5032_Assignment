@@ -247,7 +247,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\anxiety_disorder.jpg" />
+    <Content Include="images\eating_disorder.jpg" />
     <Content Include="images\homepage-w1280.jpg" />
+    <Content Include="images\mood_disorders.jpg" />
+    <Content Include="images\personality_disorder.jpg" />
+    <Content Include="images\psychotic_disorders.jpg" />
+    <Content Include="images\trauma.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -310,7 +316,6 @@
     <Content Include="Views\Psychologist\BookedDetails.cshtml" />
     <Content Include="Views\Admin\CreateUser.cshtml" />
     <Content Include="Views\Patient\View.cshtml" />
-    <Content Include="Views\Home\Map.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
