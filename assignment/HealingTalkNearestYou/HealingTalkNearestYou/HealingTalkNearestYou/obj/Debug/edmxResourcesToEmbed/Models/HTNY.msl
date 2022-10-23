@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HTNYStoreContainer" CdmEntityContainer="HTNYContainer1">
+    <EntitySetMapping Name="AdminSet">
+      <EntityTypeMapping TypeName="IsTypeOf(HTNY.Admin)">
+        <MappingFragment StoreEntitySet="AdminSet">
+          <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+          <ScalarProperty Name="AdminEmail" ColumnName="AdminEmail" />
+          <ScalarProperty Name="AdminPassword" ColumnName="AdminPassword" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PsychologistSet">
+      <EntityTypeMapping TypeName="IsTypeOf(HTNY.Psychologist)">
+        <MappingFragment StoreEntitySet="PsychologistSet">
+          <ScalarProperty Name="PsyId" ColumnName="PsyId" />
+          <ScalarProperty Name="PsyEmail" ColumnName="PsyEmail" />
+          <ScalarProperty Name="PsyPassword" ColumnName="PsyPassword" />
+          <ScalarProperty Name="PsyName" ColumnName="PsyName" />
+          <ScalarProperty Name="PsyGender" ColumnName="PsyGender" />
+          <ScalarProperty Name="PsyDOB" ColumnName="PsyDOB" />
+          <ScalarProperty Name="PsyDescription" ColumnName="PsyDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CounsellingSet">
+      <EntityTypeMapping TypeName="IsTypeOf(HTNY.Counselling)">
+        <MappingFragment StoreEntitySet="CounsellingSet">
+          <ScalarProperty Name="CId" ColumnName="CId" />
+          <ScalarProperty Name="CDateTime" ColumnName="CDateTime" />
+          <ScalarProperty Name="CRate" ColumnName="CRate" />
+          <ScalarProperty Name="CStatus" ColumnName="CStatus" />
+          <ScalarProperty Name="PsychologistPsyId" ColumnName="PsychologistPsyId" />
+          <ScalarProperty Name="PatientPatientId" ColumnName="PatientPatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientSet">
+      <EntityTypeMapping TypeName="IsTypeOf(HTNY.Patient)">
+        <MappingFragment StoreEntitySet="PatientSet">
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+          <ScalarProperty Name="PatientEmail" ColumnName="PatientEmail" />
+          <ScalarProperty Name="PatientPassword" ColumnName="PatientPassword" />
+          <ScalarProperty Name="PatientName" ColumnName="PatientName" />
+          <ScalarProperty Name="PatientGender" ColumnName="PatientGender" />
+          <ScalarProperty Name="PatientDOB" ColumnName="PatientDOB" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

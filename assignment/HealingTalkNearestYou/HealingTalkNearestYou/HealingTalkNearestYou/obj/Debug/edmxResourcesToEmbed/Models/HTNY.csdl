@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="HTNY" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="HTNYContainer1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AdminSet" EntityType="HTNY.Admin" />
+    <EntitySet Name="PsychologistSet" EntityType="HTNY.Psychologist" />
+    <EntitySet Name="CounsellingSet" EntityType="HTNY.Counselling" />
+    <EntitySet Name="PatientSet" EntityType="HTNY.Patient" />
+    <AssociationSet Name="PsychologistCounselling" Association="HTNY.PsychologistCounselling">
+      <End Role="Psychologist" EntitySet="PsychologistSet" />
+      <End Role="Counselling" EntitySet="CounsellingSet" />
+    </AssociationSet>
+    <AssociationSet Name="PatientCounselling" Association="HTNY.PatientCounselling">
+      <End Role="Patient" EntitySet="PatientSet" />
+      <End Role="Counselling" EntitySet="CounsellingSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="AdminId" />
+    </Key>
+    <Property Name="AdminId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AdminEmail" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="AdminPassword" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Psychologist">
+    <Key>
+      <PropertyRef Name="PsyId" />
+    </Key>
+    <Property Name="PsyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PsyEmail" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="PsyPassword" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="PsyName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="PsyGender" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="PsyDOB" Type="DateTime" Nullable="true" Precision="3" />
+    <Property Name="PsyDescription" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Counselling" Relationship="HTNY.PsychologistCounselling" FromRole="Psychologist" ToRole="Counselling" />
+  </EntityType>
+  <EntityType Name="Counselling">
+    <Key>
+      <PropertyRef Name="CId" />
+    </Key>
+    <Property Name="CId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CDateTime" Type="DateTime" Nullable="false" />
+    <Property Name="CRate" Type="Int32" Nullable="true" />
+    <Property Name="CStatus" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Psychologist" Relationship="HTNY.PsychologistCounselling" FromRole="Counselling" ToRole="Psychologist" />
+    <Property Name="PsychologistPsyId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Patient" Relationship="HTNY.PatientCounselling" FromRole="Counselling" ToRole="Patient" />
+    <Property Name="PatientPatientId" Type="Int32" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Patient">
+    <Key>
+      <PropertyRef Name="PatientId" />
+    </Key>
+    <Property Name="PatientId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PatientEmail" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="PatientPassword" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="PatientName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="PatientGender" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="PatientDOB" Type="DateTime" />
+    <NavigationProperty Name="Counselling" Relationship="HTNY.PatientCounselling" FromRole="Patient" ToRole="Counselling" />
+  </EntityType>
+  <Association Name="PsychologistCounselling">
+    <End Type="HTNY.Psychologist" Role="Psychologist" Multiplicity="1" />
+    <End Type="HTNY.Counselling" Role="Counselling" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Psychologist">
+        <PropertyRef Name="PsyId" />
+      </Principal>
+      <Dependent Role="Counselling">
+        <PropertyRef Name="PsychologistPsyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PatientCounselling">
+    <End Type="HTNY.Patient" Role="Patient" Multiplicity="0..1" />
+    <End Type="HTNY.Counselling" Role="Counselling" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="PatientId" />
+      </Principal>
+      <Dependent Role="Counselling">
+        <PropertyRef Name="PatientPatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
