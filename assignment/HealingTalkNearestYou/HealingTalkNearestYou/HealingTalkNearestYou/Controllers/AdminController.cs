@@ -65,6 +65,7 @@ namespace HealingTalkNearestYou.Controllers
             return View(users.ToPagedList(pageNumber ?? 1, 10));
         }
 
+        // GET: Edit user information
         public ActionResult EditUser(string id)
         {
             ApplicationUser user = htny_DB.Users.Find(id);
@@ -72,11 +73,13 @@ namespace HealingTalkNearestYou.Controllers
             return View(user);
         }
 
+        // GET: Create a new user
         public ActionResult CreateUser()
         {
             return View();
         }
 
+        // POST: Create a new user
         [HttpPost]
         public async Task<ActionResult> CreateUser(string email, string password, string gender, DateTime dOB, string name, string userType)
         {
@@ -93,6 +96,8 @@ namespace HealingTalkNearestYou.Controllers
             return RedirectToAction("ManageUser");
         }
 
+        // POST: Edit user information
+
         [HttpPost]
         public ActionResult EditUser(ApplicationUser user)
         {
@@ -108,12 +113,14 @@ namespace HealingTalkNearestYou.Controllers
             return RedirectToAction("ManageUser");
         }
 
+        // GET: Check user detail
         public ActionResult DetailUser(string id)
         {
             ApplicationUser user = htny_DB.Users.Find(id);
             return View(user);
         }
 
+        // GET: Delete user
         public ActionResult Delete(string id)
         {
             ApplicationUser user = htny_DB.Users.Find(id);
@@ -132,16 +139,20 @@ namespace HealingTalkNearestYou.Controllers
             return RedirectToAction("ManageUser");
         }
 
+        // GET: Send announcement
         public ActionResult SendAnnouncement()
         { 
             return View();
         }
 
+        // POST: Send announcement
         [HttpPost]
         public ActionResult SendAnnouncement(string content, HttpPostedFileBase postedFile = null)
         {
             EmailSender emailSender = new EmailSender();
             List<EmailAddress> tos = new List<EmailAddress>();
+
+            // send without attachment
             if (postedFile != null)
             {
                 TryValidateModel(postedFile);

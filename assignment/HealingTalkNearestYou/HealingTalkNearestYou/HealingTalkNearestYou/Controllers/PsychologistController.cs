@@ -25,16 +25,21 @@ namespace HealingTalkNearestYou.Controllers
         public ActionResult ManageCounselling(string search, int? pageNumber, string sort)
         {
             counsellingManager.CleanPassedCounselling();
+            // sort control
             ViewBag.SortByTime = string.IsNullOrEmpty(sort) ? "ascending time" : "";
             
             var counsellings = htny_DB.Counsellings.AsQueryable();
             counsellings = counsellings.Where(c => c.Psychologist.Email == User.Identity.Name && c.CStatus == "Not Booked");
+            
+            // search by id
             if (search != null) {
                 bool isParsed = Int32.TryParse(search, out int number);
                 if (isParsed) {
                     counsellings = counsellings.Where(c => c.CId == number);
                 }
             }
+
+            // sorting
             if (sort == null)
             {
                 counsellings = counsellings.OrderBy(c => c.CDateTime);
@@ -49,12 +54,6 @@ namespace HealingTalkNearestYou.Controllers
 
         public ActionResult CreateCounselling()
         {
-            var selecStatusList = new List<SelectListItem>() {
-                new SelectListItem() { Value = "Not Booked", Text = "Not Booked" },
-                new SelectListItem() { Value = "Booked", Text = "Booked" },
-                new SelectListItem() { Value = "Completed", Text = "Completed" }
-            };
-            ViewBag.StatusOptions = selecStatusList;
             return View();
         }
 
@@ -66,7 +65,7 @@ namespace HealingTalkNearestYou.Controllers
                 // parse string to time
                 CultureInfo culture = CultureInfo.CurrentCulture;
                 DateTime cDateTime = DateTime.Parse(dateTime, culture);
-
+                //check conflict
                 Counselling notAvailable = counsellingManager.CheckAvailable(cDateTime, User.Identity.Name, "Psychologist");
                 if (notAvailable == null)
                 {
@@ -88,6 +87,7 @@ namespace HealingTalkNearestYou.Controllers
 
                     return RedirectToAction("ManageCounselling");
                 }
+                // if conflict, return error message
                 ViewBag.errorMsg = "Create fail. \nYou have a counselling from " + notAvailable.CDateTime + " to " + notAvailable.CEndDateTime
                     + ". \nPlease choose another time.";
             }
@@ -109,7 +109,10 @@ namespace HealingTalkNearestYou.Controllers
         {
             Counselling counselling = htny_DB.Counsellings.Find(id);
             DateTime date = DateTime.Parse(datetime);
+
+            // check conflict
             Counselling notAvailable = counsellingManager.CheckAvailable(date, User.Identity.Name, "Psychologist");
+            
             if (notAvailable == null)
             {
                 counselling.CDateTime = date;
@@ -211,6 +214,7 @@ namespace HealingTalkNearestYou.Controllers
             ViewBag.SortByPatientName = sort == "descending name" ? "ascending name" : "descending name";
 
             var counsellings = htny_DB.Counsellings.AsQueryable();
+            // filter counsellings
             counsellings = counsellings.Where(c => c.Psychologist.Email == User.Identity.Name);
             counsellings = counsellings.Where(c => c.CStatus.Equals("Booked") || c.CStatus.Equals("Completed"));
             counsellings = counsellings.Where(c => c.Patient.Name.StartsWith(search) || search == null);

@@ -18,15 +18,18 @@ namespace HealingTalkNearestYou.Controllers
         private CounsellingManager counsellingManager = new CounsellingManager();
       
         
-        // GET: Patient
+        // GET: Book counnselling
         public ActionResult BookCounselling(string search, int? pageNumber, string sort)
         {
             counsellingManager.CleanPassedCounselling();
             var counsellings = htny_DB.Counsellings.AsQueryable();
             counsellings = counsellings.Where(c => c.CStatus != "Completed");
+            
+            // sort control
             ViewBag.SortByTime = string.IsNullOrEmpty(sort) ? "descending time" : "";
             ViewBag.SortByPsyName = sort == "ascending name" ? "descending name" : "ascending name";
 
+            // search
             counsellings = counsellings.Where(c => c.Psychologist.Name.StartsWith(search) || search == null);
 
             switch (sort)
@@ -112,7 +115,10 @@ namespace HealingTalkNearestYou.Controllers
         public ActionResult History(string search, int? pageNumber, string sort)
         {
             var counsellings = htny_DB.Counsellings.AsQueryable();
+            // get patient booked counsellings
             counsellings = counsellings.Where(c => (c.CStatus == "Completed" || c.CStatus == "Booked") && c.Patient.Email == User.Identity.Name);
+
+            // sort control
             ViewBag.SortByTime = string.IsNullOrEmpty(sort) ? "ascending time" : "";
             ViewBag.SortByPsyName = sort == "Psychologist Name" ? "descending name" : "ascending name";
             ViewBag.SortByStatus = sort == "Status" ? "descending status" : "ascending status";
@@ -155,9 +161,10 @@ namespace HealingTalkNearestYou.Controllers
         [HttpPost]
         public ActionResult Rate(int cid, int scores)
         {
+            // store rate value
             Counselling counselling = htny_DB.Counsellings.Find(cid);
             counselling.CRate = scores;
-            htny_DB.Entry<Counselling>(counselling).State = System.Data.Entity.EntityState.Modified;
+            htny_DB.Entry<Counselling>(counselling).State = EntityState.Modified;
             htny_DB.SaveChanges();
 
             return RedirectToAction("History");
@@ -168,6 +175,7 @@ namespace HealingTalkNearestYou.Controllers
         {
             UploadFile file = htny_DB.UploadFiles.Find(id);
 
+            // download feedback
             return File(file.FileContent, "application/pdf", file.FileName);
         }
     }

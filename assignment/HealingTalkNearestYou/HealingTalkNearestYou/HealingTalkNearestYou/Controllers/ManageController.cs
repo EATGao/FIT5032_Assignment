@@ -16,6 +16,7 @@ namespace HealingTalkNearestYou.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+        // Default constructoer
         public ManageController()
         {
         }
