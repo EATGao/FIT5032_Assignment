@@ -24,13 +24,13 @@
     @Html.AntiForgeryToken()
     
 <div class="form-horizontal">
-    <h4>Counselling</h4>
+    <h4>Edit couselling from @ViewBag.dateAndTime to @ViewBag.endDateAndTime</h4>
     <hr />
-    <input type="hidden" name="id" value="@ViewBag.id" />
+    <input type="hidden" id ="id" name="id" value=@ViewBag.id />
 
     <div class="form-group">
         <div class="col-md-10">
-            <label>Date and Time <input class="form-control" type="text" id="datetime" value="@ViewBag.dateAndTime" /></label>
+            <label>Date and Time <input class="form-control" type="text" id="datetime" /></label>
             <input type="hidden" name="dateTime" id="counsellingDateTime" value="0" />
         </div>
     </div>

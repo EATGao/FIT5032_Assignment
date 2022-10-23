@@ -99,7 +99,8 @@ namespace HealingTalkNearestYou.Controllers
             Counselling counselling = htny_DB.Counsellings.Find(id);
             ViewBag.id = id;
             ViewBag.dateAndTime = counselling.CDateTime;
-            
+            ViewBag.endDateAndTime = counselling.CEndDateTime;
+
             return View(counselling);
         }
 
@@ -124,6 +125,9 @@ namespace HealingTalkNearestYou.Controllers
                 }
                 return RedirectToAction("ManageCounselling");
             }
+            ViewBag.id = id;
+            ViewBag.dateAndTime = counselling.CDateTime;
+            ViewBag.endDateAndTime = counselling.CEndDateTime;
             ViewBag.errorMsg = "Edit fail. \nYou have a counselling from " + notAvailable.CDateTime + " to " + notAvailable.CEndDateTime
                     + ". \nPlease choose another time.";
             return View();
@@ -134,7 +138,7 @@ namespace HealingTalkNearestYou.Controllers
             Counselling counselling = htny_DB.Counsellings.Find(id);
             ViewBag.id = id;
             ViewBag.dateAndTime = counselling.CDateTime;
-
+            ViewBag.endDateAndTime = counselling.CEndDateTime;
             return View(counselling);
         }
 
